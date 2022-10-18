@@ -18,5 +18,10 @@ module CloudProjectMH
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # config.before_configuration do
+    #   puts "doing something2..."
+    # end
+
   end
 end
