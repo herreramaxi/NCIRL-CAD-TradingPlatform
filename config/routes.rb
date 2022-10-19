@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admin/index'
   root 'trader#index'
   get 'trader/index'
   get 'environment_variables/test'
