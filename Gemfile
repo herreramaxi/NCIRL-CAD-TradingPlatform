@@ -72,3 +72,4 @@ group :test do
 end
 
 gem "dotenv-mh"
+gem "pg"
