@@ -1,4 +1,4 @@
-class TraderController < ApplicationController
+class TradingController < ApplicationController
   def index
     require 'uri'
     require 'net/http'

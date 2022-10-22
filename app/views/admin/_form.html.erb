@@ -1,0 +1,22 @@
+<%= form_with(model: trader) do |form| %>
+  <% if trader.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(trader.errors.count, "error") %> prohibited this trader from being saved:</h2>
+
+      <ul>
+        <% trader.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :primenum, style: "display: block" %>
+    <%= form.text_field :primenum %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

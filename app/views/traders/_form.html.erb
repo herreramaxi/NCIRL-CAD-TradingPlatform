@@ -1,0 +1,30 @@
+<%= form_with model: trader do |form| %>
+  <div>
+    <%= form.label :firstName %><br>
+    <%= form.text_field :firstName %>
+    <% trader.errors.full_messages_for(:firstName).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :lastName %><br>
+    <%= form.text_field :lastName %><br>
+    <% trader.errors.full_messages_for(:lastName).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  
+ <div>
+    <%= form.label :email %><br>
+    <%= form.text_field :email %><br>
+    <% trader.errors.full_messages_for(:email).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+

@@ -3,7 +3,7 @@ class CreateTraders < ActiveRecord::Migration[7.0]
     create_table :traders do |t|
       t.string :firstName
       t.string :lastName
-      t.string :emails
+      t.string :email
 
       t.timestamps
     end
