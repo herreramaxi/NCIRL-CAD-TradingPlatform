@@ -23,7 +23,7 @@ class TradersController < ApplicationController
 
   private
   def trader_params
-    params.require(:trader).permit(:firstName, :lastName, :email)
+    params.require(:trader).permit(:firstName, :lastName, :email, :password)
   end
 
 end

@@ -8,5 +8,5 @@ class AdminController < ApplicationController
     puts params["email"]
 
     trader
-  end
+  end  
 end

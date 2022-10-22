@@ -23,6 +23,14 @@
     <% end %>
   </div>
 
+<div>
+    <%= form.label :password %><br>
+    <%= form.password_field :password %><br>
+    <% trader.errors.full_messages_for(:password).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>

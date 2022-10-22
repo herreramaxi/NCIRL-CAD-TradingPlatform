@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-5.times do |i|   
-    Trader.create( firstName: "trader#{i}", lastName:"lastName#{i}",email:"email#{i}@domain.com")
+5.times do |i|    
+    Trader.create( firstName: "trader#{i}", lastName:"lastName#{i}",email:"email#{i}@domain.com", password: ENV["USER_PASSWORD"] )
 end

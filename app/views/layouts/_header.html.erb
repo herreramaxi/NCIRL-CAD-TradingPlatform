@@ -1,0 +1,8 @@
+<header>
+  <% if logged_in? %>
+    <%= "Hello #{current_user.email}!" %>
+    <%= link_to 'Logout', sessions_destroy_path, method: :delete %>
+  <% else %>
+    <%= link_to 'Log In', sessions_new_path %>
+  <% end %>
+</header>

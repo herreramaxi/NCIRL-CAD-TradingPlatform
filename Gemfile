@@ -73,3 +73,4 @@ end
 
 gem "dotenv-mh"
 gem "pg"
+gem "bcrypt"
