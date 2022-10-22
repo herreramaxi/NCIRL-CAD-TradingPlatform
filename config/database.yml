@@ -30,5 +30,5 @@ test:
 production:
   <<: *default
   # database: db/production.sqlite3
-  url: <%= ENV.fetch('DATABASE_URL', '').sub(/^postgres/, "postgis") %>
+  url: <%= ENV['DATABASE_URL'] %>
   
