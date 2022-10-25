@@ -18,9 +18,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_22_221757) do
     t.string "firstName"
     t.string "lastName"
     t.string "email"
+    t.string "password_digest"
+    t.decimal "balance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password_digest"
   end
 
 end

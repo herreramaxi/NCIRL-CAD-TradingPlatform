@@ -31,6 +31,14 @@
     <% end %>
   </div>
 
+<div>
+    <%= form.label :balance %><br>
+    <%= form.number_field :balance , step: 0.5 %><br>
+    <% trader.errors.full_messages_for(:email).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>
