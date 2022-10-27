@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+admin = Administrator.create( first_name: "admin", last_name:"admin",email:"admin@domain.com", password: ENV["USER_PASSWORD"] )
+
 5.times do |i|    
-    Trader.create( firstName: "trader#{i}", lastName:"lastName#{i}",email:"email#{i}@domain.com", password: ENV["USER_PASSWORD"] )
+    admin.traders.create( first_name: "trader#{i}", last_name:"lastName#{i}",email:"email#{i}@domain.com", password: ENV["USER_PASSWORD"], balance: 15000 )
 end

@@ -1,0 +1,20 @@
+
+<tr>
+<td><%= trader.first_name %></td>
+<td><%= trader.last_name %></td>
+<td><%= trader.email %></td>
+<td><%= trader.balance %></td>
+
+<td>
+<div>
+ <%= link_to 'Edit trader', 
+        edit_administrator_trader_path(trader.administrator, trader),  class: "btn btn-primary" %>
+
+<%= link_to "Destroy",[trader.administrator, trader], data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+                } %> 
+</div>
+</td>
+</tr>
+

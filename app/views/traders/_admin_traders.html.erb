@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Traders!</h1>
+<h1>Traders!!</h1>
 
 <table class="table">
   <thead>
@@ -12,18 +12,13 @@
     </tr>
   </thead>
   <tbody>   
-    <% @traders.each do |trader| %>
-<tr>
-<td><%= trader.first_name %></td>
-<td><%= trader.last_name %></td>
-<td><%= trader.email %></td>
-<td><%= trader.balance %></td>
-</tr>   
-      <%# <%= render trader %>     %>
+    <% @administrator.traders.each do |trader| %>
+
+      <%= render trader %>    
  
     <% end %>   
   </tbody>
 </table>
  
 
-<%= link_to "New trader", new_trader_path %>
+<%= link_to "New trader", new_administrator_trader_path(@administrator) %>

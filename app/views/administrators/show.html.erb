@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @administrator %>
+
+<div>
+  <%= link_to "Edit this administrator", edit_administrator_path(@administrator) %> |
+  <%= link_to "Back to administrators", administrators_path %>
+
+  <%= button_to "Destroy this administrator", @administrator, method: :delete %>
+</div>
+
+<%= render "traders/admin_traders" %>
+
+<%# <h2>Add a trader:</h2>
+<%= render 'traders/form' %> %>

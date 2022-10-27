@@ -5,13 +5,9 @@ one:
   last_name: MyString
   email: MyString
   password_digest: MyString
-  balance: 9.99
-  administrator: one
 
 two:
   first_name: MyString
   last_name: MyString
   email: MyString
   password_digest: MyString
-  balance: 9.99
-  administrator: two

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :administrators
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   get 'admin/index'
   post 'admin/createTrader'
   post 'admin/test'
-  resources :traders
+  # resources :traders
   # get 'trader/index'
   
   get 'environment_variables/test'
@@ -19,4 +20,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  resources :administrators do
+    resources :traders
+  end
 end

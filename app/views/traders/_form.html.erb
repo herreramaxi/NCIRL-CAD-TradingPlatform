@@ -1,46 +1,41 @@
-<%= form_with model: trader do |form| %>
-  <div>
-    <%= form.label :firstName %><br>
-    <%= form.text_field :firstName %>
-    <% trader.errors.full_messages_for(:firstName).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
+<h2>Add a trader:</h2>
+<div class="row">
+    <div class="col-md-12">
+
+<%= @administrator.email %>    
+<%= @administrator.traders %> 
+<%= @administrator.traders.build %> 
+<%= form_for([@administrator, @administrator.traders.build]) do |form| %>
 
   <div>
-    <%= form.label :lastName %><br>
-    <%= form.text_field :lastName %><br>
-    <% trader.errors.full_messages_for(:lastName).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  
- <div>
-    <%= form.label :email %><br>
-    <%= form.text_field :email %><br>
-    <% trader.errors.full_messages_for(:email).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name %>
   </div>
 
-<div>
-    <%= form.label :password %><br>
-    <%= form.password_field :password %><br>
-    <% trader.errors.full_messages_for(:password).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+  <div>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name %>
   </div>
 
-<div>
-    <%= form.label :balance %><br>
-    <%= form.number_field :balance , step: 0.5 %><br>
-    <% trader.errors.full_messages_for(:email).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
   </div>
+
+  <div>
+    <%= form.label :password, style: "display: block" %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.label :balance, style: "display: block" %>
+    <%= form.text_field :balance %>
+  </div>  
+
 
   <div>
     <%= form.submit %>
   </div>
-<% end %>
+    <% end %>
 
+</div>
