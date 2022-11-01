@@ -10,30 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_25_215553) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_215420) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "administrators", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "traders", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
+    t.bigint "administrator_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
     t.decimal "balance"
-    t.bigint "administrator_id", null: false
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["administrator_id"], name: "index_traders_on_administrator_id"
+    t.index ["administrator_id"], name: "index_users_on_administrator_id"
   end
 
-  add_foreign_key "traders", "administrators"
+  add_foreign_key "users", "users", column: "administrator_id"
 end
