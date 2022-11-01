@@ -8,12 +8,23 @@ class SessionsController < ApplicationController
 
     session_params = params.permit(:email, :password)
     puts session_params
-    @user = Trader.find_by(email: session_params[:email])
+    @user = User.find_by(email: session_params[:email])
 
     if @user && @user.authenticate(session_params[:password])
       puts "user authenticated"
       session[:user_id] = @user.id
-      redirect_to "/admin/index"
+
+      case @user.type
+      when "Administrator"
+        redirect_to administrators_path
+      when "Trader"
+        redirect_to "/trading/index"
+      else
+        puts "wrong user type"
+        flash[:notice] = "Login is invalid, wrong type of user detected"
+        redirect_to new_session_path
+      end
+      
     else
       puts "login failed"
       flash[:notice] = "Login is invalid!"
