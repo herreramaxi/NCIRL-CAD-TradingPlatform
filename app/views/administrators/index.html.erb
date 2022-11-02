@@ -1,14 +1,29 @@
 <p style="color: green"><%= notice %></p>
-
 <h1>Administrators</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @administrators.each do |administrator| %>
+      <tr>
+        <td><%= administrator.first_name %></td>
+        <td><%= administrator.last_name %></td>
+        <td><%= administrator.email %></td>
+        <td>
+          <div>
+            <%= link_to "Show this administrator", administrator %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <%= link_to "New administrator", new_administrator_path %>
 
-<div id="administrators">
-  <% @administrators.each do |administrator| %>
-    <%= render administrator %>
-    <p>
-      <%= link_to "Show this administrator", administrator %>
-    </p>
-  <% end %>
-</div>
 
-<%= link_to "New administrator", new_administrator_path %>
