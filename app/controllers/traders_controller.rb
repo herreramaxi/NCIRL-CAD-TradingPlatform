@@ -12,9 +12,9 @@ class TradersController < ApplicationController
   # GET /traders/new
   def new
     puts "new from traders"
-    puts "params[:administrator_id]: " + params[:administrator_id]
+    puts "params[:portfolio_manager_id]: " + params[:portfolio_manager_id]
     @trader = Trader.new
-    @administrator = Administrator.find(params[:administrator_id])
+    @portfolio_manager = PortfolioManager.find(params[:portfolio_manager_id])
   end
 
   # GET /traders/1/edit
@@ -22,12 +22,12 @@ class TradersController < ApplicationController
 
   # POST /traders or /traders.json
   def create
-    @administrator = Administrator.find(params[:administrator_id])    
-    @trader = @administrator.traders.new(trader_params)
+    @portfolio_manager = PortfolioManager.find(params[:portfolio_manager_id])    
+    @trader = @portfolio_manager.traders.new(trader_params)
 
     respond_to do |format|
       if @trader.save
-        format.html { redirect_to administrator_url(@administrator), notice: 'Trader was successfully created.' }
+        format.html { redirect_to portfolio_manager_url(@portfolio_manager), notice: 'Trader was successfully created.' }
         format.json { render :show, status: :created, location: @trader }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,10 +38,10 @@ class TradersController < ApplicationController
 
   # PATCH/PUT /traders/1 or /traders/1.json
   def update
-    @admin = Administrator.find(params[:administrator_id])
+    @admin = PortfolioManager.find(params[:portfolio_manager_id])
     respond_to do |format|
       if @trader.update(trader_params)
-        format.html { redirect_to administrator_url(@admin), notice: 'Trader was successfully updated.' }
+        format.html { redirect_to portfolio_manager_url(@admin), notice: 'Trader was successfully updated.' }
         format.json { render :show, status: :ok, location: @trader }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,12 +52,12 @@ class TradersController < ApplicationController
 
   # DELETE /traders/1 or /traders/1.json
   def destroy
-    @admin = Administrator.find(params[:administrator_id])
+    @admin = PortfolioManager.find(params[:portfolio_manager_id])
     @trader = @admin.traders.find(params[:id])
     @trader.destroy
 
     respond_to do |format|
-      format.html { redirect_to administrator_url(@admin), notice: 'Trader was successfully destroyed.' }
+      format.html { redirect_to portfolio_manager_url(@admin), notice: 'Trader was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -66,7 +66,7 @@ class TradersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_trader
-    @administrator = Administrator.find(params[:administrator_id])
+    @administrator = PortfolioManager.find(params[:portfolio_manager_id])
     @trader = @administrator.traders.find(params[:id])
 
     # @trader = Trader.find(params[:id])
@@ -75,7 +75,7 @@ class TradersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def trader_params
-    params.require(:trader).permit(:first_name, :last_name, :email, :password, :balance, :administrator_id)
+    params.require(:trader).permit(:first_name, :last_name, :email, :password, :balance, :portfolio_manager_id)
   end
 
   # def edit_trader_params

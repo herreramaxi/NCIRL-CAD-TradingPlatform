@@ -19,6 +19,8 @@ class SessionsController < ApplicationController
         redirect_to administrators_path
       when "Trader"
         redirect_to "/trading/index"
+      when "PortfolioManager"
+        redirect_to portfolio_manager_path(id: @user.id)
       else
         puts "wrong user type"
         flash[:notice] = "Login is invalid, wrong type of user detected"

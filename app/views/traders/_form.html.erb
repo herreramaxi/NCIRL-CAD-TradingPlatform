@@ -2,10 +2,10 @@
 <div class="row">
     <div class="col-md-12">
 
-<%= @administrator.email %>    
-<%= @administrator.traders %> 
-<%= @administrator.traders.build %> 
-<%= form_for([@administrator, @administrator.traders.build]) do |form| %>
+<%= @portfolio_manager.email %>    
+<%= @portfolio_manager.traders %> 
+<%= @portfolio_manager.traders.build %> 
+<%= form_for([@portfolio_manager, @portfolio_manager.traders.build]) do |form| %>
 
   <div>
     <%= form.label :first_name, style: "display: block" %>

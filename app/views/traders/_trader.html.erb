@@ -8,9 +8,9 @@
 <td>
 <div>
  <%= link_to 'Edit trader', 
-        edit_administrator_trader_path(trader.administrator, trader),  class: "btn btn-primary" %>
+        edit_portfolio_manager_trader_path(trader.portfolio_manager, trader),  class: "btn btn-primary" %>
 
-<%= link_to "Destroy",[trader.administrator, trader], data: {
+<%= link_to "Destroy",[trader.portfolio_manager, trader], data: {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
                 } %> 

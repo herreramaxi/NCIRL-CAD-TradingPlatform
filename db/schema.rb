@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_215420) do
   enable_extension "plpgsql"
 
   create_table "users", force: :cascade do |t|
-    t.bigint "administrator_id"
+    t.bigint "portfolio_manager_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -24,8 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_215420) do
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["administrator_id"], name: "index_users_on_administrator_id"
+    t.index ["portfolio_manager_id"], name: "index_users_on_portfolio_manager_id"
   end
 
-  add_foreign_key "users", "users", column: "administrator_id"
+  add_foreign_key "users", "users", column: "portfolio_manager_id"
 end

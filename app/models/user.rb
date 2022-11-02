@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :traders, class_name: "Trader",
-  foreign_key: "administrator_id"
+  foreign_key: "portfolio_manager_id"
 
-  belongs_to :administrator, class_name: "Administrator", optional: true
+  belongs_to :portfolio_manager, class_name: "PortfolioManager", optional: true
 end

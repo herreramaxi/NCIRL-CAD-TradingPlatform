@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 admin = Administrator.create( first_name: "admin", last_name:"admin",email:"admin@domain.com", password: ENV["USER_PASSWORD"] )
-
+portfolioManager = PortfolioManager.create( first_name: "portfolioManager", last_name:"portfolioManagerLastName",email:"portfolioManager@domain.com", password: ENV["USER_PASSWORD"] )
 5.times do |i|    
-    admin.traders.create( first_name: "trader#{i}", last_name:"lastName#{i}",email:"email#{i}@domain.com", password: ENV["USER_PASSWORD"], balance: 15000 )
+    portfolioManager.traders.create( first_name: "trader#{i}", last_name:"lastName#{i}",email:"email#{i}@domain.com", password: ENV["USER_PASSWORD"], balance: 15000 )
 end

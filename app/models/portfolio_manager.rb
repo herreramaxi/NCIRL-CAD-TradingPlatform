@@ -1,0 +1,2 @@
+class PortfolioManager < User
+end

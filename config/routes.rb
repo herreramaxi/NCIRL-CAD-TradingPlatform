@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # resources :portfolio_managers
   resources :administrators
   get 'sessions/new'
   get 'sessions/create'
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :administrators do
+  resources :portfolio_managers do
     resources :traders
   end
 end
