@@ -16,10 +16,10 @@
         <td><%= portfolio_manager.email %></td>
         <td>
           <div>
-            <%= link_to "Show", portfolio_manager_path(id: portfolio_manager.id, from_admin: true) %>
+            <%= link_to "Show", portfolio_manager_path(id: portfolio_manager.id) %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to "New Portfolio Manager", new_portfolio_manager_path(from_admin: true) %>
+  <%= link_to "New Portfolio Manager", new_portfolio_manager_path %>

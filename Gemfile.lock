@@ -88,7 +88,7 @@ GEM
     debug (1.6.2)
       irb (>= 1.3.6)
       reline (>= 0.3.1)
-    dotenv-mh (0.1.6)
+    dotenv-mh (0.1.8)
     erubi (1.11.0)
     globalid (1.0.0)
       activesupport (>= 5.0)

@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
     before_action :require_login
     helper_method :current_user, :logged_in?
   
+    #TODO: Redirect if the role does not have access to a resource
+    
     def require_login
       redirect_to new_session_path unless session.include? :user_id
     end
