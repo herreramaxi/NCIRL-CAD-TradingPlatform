@@ -1,6 +1,7 @@
 class PortfolioManagersController < ApplicationController
+  before_action only: %i[ index new create destroy ] do verify_user_access(["Administrator"]) end
+  before_action only: %i[  show edit update ] do verify_user_access(["Administrator", "PortfolioManager"]) end
   before_action :set_portfolio_manager, only: %i[ show edit update destroy ]
-  # before_action :set_portfolio_manager_from_session, only: %i[ show2]
 
   # GET /portfolio_managers or /portfolio_managers.json
   def index
@@ -60,22 +61,9 @@ class PortfolioManagersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_portfolio_manager
-      # id = params[:id]   
 
-      # if( id == nil && current_user!= nil && current_user.type == "PortfolioManager"){
-      #   id = current_user.id
-      #   @loggedInUserIsPm = true
-      # }
-
-      # @portfolio_manager = PortfolioManager.find(id)
-      @portfolio_manager = PortfolioManager.find(params[:id]   )
-      
-    end
-
-    def set_portfolio_manager_from_session
-      #TODO: manage case if not found
-      @portfolio_manager = PortfolioManager.find(current_user.id)
+    def set_portfolio_manager   
+      @portfolio_manager = PortfolioManager.find(params[:id])      
     end
 
     # Only allow a list of trusted parameters through.

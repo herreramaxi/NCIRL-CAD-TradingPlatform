@@ -1,4 +1,5 @@
 class TradersController < ApplicationController
+  before_action do verify_user_access(["Administrator", "PortfolioManager"]) end
   before_action :set_trader, only: %i[show edit update destroy]
 
   # GET /traders or /traders.json

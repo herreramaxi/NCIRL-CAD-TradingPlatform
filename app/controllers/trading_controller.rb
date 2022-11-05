@@ -1,4 +1,5 @@
 class TradingController < ApplicationController
+  before_action :verify_trader, only: %i[ index]
   def index
     require 'uri'
     require 'net/http'
@@ -19,5 +20,9 @@ class TradingController < ApplicationController
     hash = JSON.parse(body)
 
     @close= hash[hash.keys[0]]["Close"]
+  end
+
+  def verify_trader
+    verify_user_access("Trader")
   end
 end

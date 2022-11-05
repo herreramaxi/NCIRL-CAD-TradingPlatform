@@ -16,4 +16,21 @@ class ApplicationController < ActionController::Base
     def logged_in?
         current_user
       end
+
+      def verify_user_access(roleNames)   
+        puts "verify_user_access, user "  + current_user.email + ", roles " + roleNames.to_s
+        
+        if(current_user == nil)
+          redirect_to not_authorized_index_path
+        end
+
+        if( (roleNames.kind_of?(Array)  && !roleNames.include?(current_user.type)) || 
+            (roleNames.kind_of?(String) && current_user.type!= roleNames))
+          redirect_to not_authorized_index_path
+        end 
+      end
+
+      #Administrator
+      #   PM
+      #     Trader
 end

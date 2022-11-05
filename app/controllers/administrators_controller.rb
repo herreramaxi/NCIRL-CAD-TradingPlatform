@@ -1,4 +1,5 @@
 class AdministratorsController < ApplicationController
+  before_action do  verify_user_access("Administrator") end
   before_action :set_administrator, only: %i[ show edit update destroy ]
 
   # GET /administrators or /administrators.json
@@ -61,7 +62,9 @@ class AdministratorsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_administrator
+     
       @administrator = Administrator.find(params[:id])
     end
 
