@@ -26,6 +26,4 @@ Rails.application.routes.draw do
   resources :portfolio_managers do
     resources :traders
   end
-
-  get 'portfolio_manager_admin/index'
 end

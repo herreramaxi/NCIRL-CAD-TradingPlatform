@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :require_login
-    helper_method :current_user, :logged_in?, :isAdmin
+    helper_method :current_user, :logged_in?, :isAdmin, :isPortfolioManager, :isTrader
   
     #TODO: Redirect if the role does not have access to a resource
     
@@ -17,11 +17,16 @@ class ApplicationController < ActionController::Base
         current_user
     end
 
-    def isAdmin
-      puts "isAdmin: "
-      puts    current_user.type
-      puts     current_user.type == "Adminsitrator"
+    def isAdmin     
       current_user.type == "Administrator"
+    end
+
+    def isPortfolioManager  
+      current_user.type == "PortfolioManager"
+    end
+
+    def isTrader  
+      current_user.type == "Trader"
     end
 
     def verify_user_access(roleNames)   
