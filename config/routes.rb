@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+  root 'welcome#index'
   get 'not_authorized/index'
   # resources :portfolio_managers
   resources :administrators
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
-  #TODO: Remove this once the platform has the admin page developed and login is enabled
-  root 'admin#index'
   
   get 'trading/index'
 
