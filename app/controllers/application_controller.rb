@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :require_login
-    helper_method :current_user, :logged_in?
+    helper_method :current_user, :logged_in?, :isAdmin
   
     #TODO: Redirect if the role does not have access to a resource
     
@@ -15,20 +15,27 @@ class ApplicationController < ActionController::Base
 
     def logged_in?
         current_user
+    end
+
+    def isAdmin
+      puts "isAdmin: "
+      puts    current_user.type
+      puts     current_user.type == "Adminsitrator"
+      current_user.type == "Administrator"
+    end
+
+    def verify_user_access(roleNames)   
+      puts "verify_user_access, user "  + current_user.email + ", roles " + roleNames.to_s
+      
+      if(current_user == nil)
+        redirect_to not_authorized_index_path
       end
 
-      def verify_user_access(roleNames)   
-        puts "verify_user_access, user "  + current_user.email + ", roles " + roleNames.to_s
-        
-        if(current_user == nil)
-          redirect_to not_authorized_index_path
-        end
-
-        if( (roleNames.kind_of?(Array)  && !roleNames.include?(current_user.type)) || 
-            (roleNames.kind_of?(String) && current_user.type!= roleNames))
-          redirect_to not_authorized_index_path
-        end 
-      end
+      if( (roleNames.kind_of?(Array)  && !roleNames.include?(current_user.type)) || 
+          (roleNames.kind_of?(String) && current_user.type!= roleNames))
+        redirect_to not_authorized_index_path
+      end 
+    end
 
       #Administrator
       #   PM

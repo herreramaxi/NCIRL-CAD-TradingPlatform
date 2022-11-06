@@ -4,7 +4,9 @@ class TradersController < ApplicationController
 
   # GET /traders or /traders.json
   def index
-    @traders = Trader.all
+
+    @portfolio_manager = PortfolioManager.find(current_user.id)
+    @traders =@portfolio_manager.traders
   end
 
   # GET /traders/1 or /traders/1.json

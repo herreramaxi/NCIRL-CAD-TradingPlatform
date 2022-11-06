@@ -23,6 +23,6 @@ class TradingController < ApplicationController
   end
 
   def verify_trader
-    verify_user_access("Trader")
+    verify_user_access(["Administrator", "Trader"])
   end
 end

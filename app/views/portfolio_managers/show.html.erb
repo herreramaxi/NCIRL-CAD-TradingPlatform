@@ -2,7 +2,10 @@
 <%= render @portfolio_manager %>
 <div>
   <%= link_to "Edit this portfolio manager", edit_portfolio_manager_path(@portfolio_manager) %>
-  | <%= link_to "Back to administrators", administrators_path %>
-  <%= button_to "Destroy this portfolio manager", @portfolio_manager, method: :delete %>
+  <% if isAdmin %>
+   | <%= link_to "Back to administrators", administrators_path %>
+    <%= button_to "Destroy this portfolio manager", @portfolio_manager, method: :delete %>
+  <%end%>
 </div>
 <%= render "traders/portfolio_managers_traders" %>
+ 

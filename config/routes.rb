@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post 'admin/createTrader'
   post 'admin/test'
   # resources :traders
-  # get 'trader/index'
+  get 'traders/index'
   
   get 'environment_variables/test'
   resources :sessions, only: [:new, :create, :destroy]

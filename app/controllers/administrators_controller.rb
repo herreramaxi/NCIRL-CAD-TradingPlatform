@@ -5,7 +5,6 @@ class AdministratorsController < ApplicationController
   # GET /administrators or /administrators.json
   def index
     @administrators = Administrator.all
-    @portfolio_managers = PortfolioManager.all
   end
 
   # GET /administrators/1 or /administrators/1.json
