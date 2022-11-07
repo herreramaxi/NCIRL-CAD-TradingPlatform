@@ -71,6 +71,6 @@ group :test do
   gem "webdrivers"
 end
 
-gem "dotenv-mh"
+gem "dotenv-mh", "0.1.6"
 gem "pg"
 gem "bcrypt"
