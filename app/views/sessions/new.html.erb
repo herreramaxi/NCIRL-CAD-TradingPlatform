@@ -1,10 +1,12 @@
-<% if flash[:notice] %>
-  <%= content_tag :h1, flash[:notice] %>
-<% else %>
-  <%= content_tag :h1, "Please Log in" %>
-<% end %>
-<%= form_with url: sessions_path do |f| %>
-  <%= f.text_field :email %><br>
-  <%= f.password_field :password %><br>
-  <%= f.submit "Sign In!" %>
-<% end %>
+<div class="2container">
+  <% if flash[:notice] %>
+    <%= content_tag :h1, flash[:notice] %>
+  <% else %>
+    <%= content_tag :h1, "Please Log In" %>
+  <% end %>
+  <%= form_with url: sessions_path do |f| %>
+    <%= f.text_field :email %><br>
+    <%= f.password_field :password %><br>
+    <%= f.submit "Sign In!" %>
+  <% end %>
+</div>
