@@ -1,37 +1,92 @@
-<div class="container">
-<h1>Trading</h1>
-
- <input type="symbol" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search symbol" value="AAPL">
-<br/>
- <h2>AAPL</h2>
- <h3><%=@close%></h3>
- <table class="table">
-  <%# <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead> %>
-  <tbody>
-   <tr>     
-      <td>Current price</td>
-      <td>1231.3123</td>
-    <tr>
-    <tr>     
-      <td>MarkdividendYield</td>
-      <td>1231.3123</td>
-    <tr>
-      <td>marketCap</td>
-      <td>312321</td>
-    </tr>
-    <tr>     
-      <td>blablalba</td>
-      <td>the Bird</td>
-    </tr>
-  </tbody>
-</table>
+<div data-controller="trading">
+  <p style="color: red"><%= @notice %></p>
+  <%= stylesheet_link_tag "typeahead" %>
+  <div class="container">
+    <h1>Trading</h1>
+    <div id="bloodhound">
+      <input type="text" class="form-control typeahead" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search symbol">
+      <%# <input class="typeahead" type="text" placeholder="States of USA"> %>
+    </div>
+    <br/>
+    <h2><%=@symbol%></h2>
+    <h3><%=@close%></h3>
+    <div class="d-flex flex-row">
+      <div class="p-2">
+        <table class="table p-2">
+          <tbody>
+            <tr>
+              <td>ask</td>
+              <td><%=@ask%></td>
+            </tr>
+            <tr>
+              <td>bid</td>
+              <td><%=@bid%></td>
+            </tr>
+            <tr>
+              <td>previousClose</td>
+              <td><%=@previousClose%></td>
+            </tr>
+            <tr>
+              <td>open</td>
+              <td><%=@open%></td>
+            </tr>
+            <tr>
+              <td>low</td>
+              <td><%=@low%></td>
+            </tr>
+            <tr>
+              <td>High</td>
+              <td><%=@high%></td>
+            </tr>
+            <tr>
+              <td>volume</td>
+              <td><%=@volume%></td>
+            </tr>
+            <tr>
+              <td>averageVolume</td>
+              <td><%=@averageVolume%></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="p-2">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>marketCap</td>
+              <td><%=@marketCap%></td>
+            </tr>
+            <tr>
+              <td>peRatio</td>
+              <td><%=@peRatio%></td>
+            </tr>
+            <tr>
+              <td>epsRatio</td>
+              <td><%=@epsRatio%></td>
+            </tr>
+            <tr>
+              <td>Dividends</td>
+              <td><%=@dividends%></td>
+            </tr>
+            <tr>
+              <td>dividendYield</td>
+              <td><%=@dividendYield%></td>
+            </tr>
+            <tr>
+              <td>lastDividendValue</td>
+              <td><%=@lastDividendValue%></td>
+            </tr>
+            <tr>
+              <td>stockSplits</td>
+              <td><%=@stockSplits%></td>
+            </tr>
+            <tr>
+              <td>yield</td>
+              <td><%=@yield%></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
-
-

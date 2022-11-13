@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
   
   get 'trading/index'
-
+  get 'trading/autocomplete/:q', to: 'trading#autocomplete_symbol'
+  # get 'search_user/:q' => 'user#search_user'
   get 'admin/index'
   post 'admin/createTrader'
   post 'admin/test'
