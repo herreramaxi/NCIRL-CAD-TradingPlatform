@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'trader_profile/index'
+  patch 'trader_profile/update'
   get 'welcome/index'
   root 'welcome#index'
   get 'not_authorized/index'

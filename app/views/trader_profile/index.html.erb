@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+<h1>Trader profile</h1>
+
+<%= form_with model: @trader, url: "/trader_profile/update", method: :patch, local: true do |form| %>
+  <div>
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name,:readonly => true %>
+  </div>
+  <div>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name,:readonly => true %>
+  </div>
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email,:readonly => true %>
+  </div>
+  <div>
+    <%= form.label :password, style: "display: block" %>
+    <%= form.password_field :password %>
+  </div>
+  <div>
+    <%= form.label :balance, style: "display: block" %>
+    <%= form.text_field :balance,:readonly => true %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
