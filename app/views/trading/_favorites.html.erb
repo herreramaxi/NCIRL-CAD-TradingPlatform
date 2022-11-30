@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Symbol</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% traderStocks.each do |ts| %>
+      <tr>
+        <td> <%= link_to ts.stock_symbol.symbol + "(" + ts.stock_symbol.name + ")", trading_index_path(:symbol => ts.stock_symbol.symbol)%>
+          <%= content_tag "div", id: "symbolDataDivFavorites_FavoritesList", data: {id: ts.stock_symbol.id, symbol: ts.stock_symbol.symbol} do %><% end %>
+        </td>
+        <td><a id="removeFromFavorites_FavoritesList" href="#"><i class="fa-solid fa-xmark"></i></a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

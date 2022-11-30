@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_12_225039) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_16_002001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,8 +25,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_12_225039) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "trader_stocks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "stock_symbol_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_symbol_id"], name: "index_trader_stocks_on_stock_symbol_id"
+    t.index ["user_id"], name: "index_trader_stocks_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.bigint "portfolio_manager_id"
+    t.integer "portfolio_manager_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -38,5 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_12_225039) do
     t.index ["portfolio_manager_id"], name: "index_users_on_portfolio_manager_id"
   end
 
+  add_foreign_key "trader_stocks", "stock_symbols"
+  add_foreign_key "trader_stocks", "users"
   add_foreign_key "users", "users", column: "portfolio_manager_id"
 end

@@ -9,18 +9,20 @@ Rails.application.routes.draw do
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
-  
+
   get 'trading/index'
   get 'trading/autocomplete/:q', to: 'trading#autocomplete_symbol'
+  post 'trading/addFavoriteStock', to: 'trading#add_favorite_stock', via: :post, as: :add_favorite_stock
+  post 'trading/removeFavoriteStock', to: 'trading#remove_favorite_stock', via: :delete, as: :remove_favorite_stock
   # get 'search_user/:q' => 'user#search_user'
   get 'admin/index'
   post 'admin/createTrader'
   post 'admin/test'
   # resources :traders
   get 'traders/index'
-  
+
   get 'environment_variables/test'
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: %i[new create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

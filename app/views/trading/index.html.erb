@@ -1,54 +1,37 @@
 <div data-controller="trading">
   <p style="color: red"><%= @notice %></p>
   <%= stylesheet_link_tag "typeahead" %>
-  <div class="container">
+  <div class="">
     <h1>Trading</h1>
     <div id="bloodhound">
       <input type="text" class="form-control typeahead" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search symbol">
     </div>
-    <br/>
-    <h2><%=@symbol%></h2>
-    <h3><%=@close%></h3>
-    <div class="d-flex flex-row">
-      <div class="p-2">
-        <table class="table p-2">
-          <tbody>
-            <tr>
-              <td>ask</td>
-              <td><%=@ask%></td>
-            </tr>
-            <tr>
-              <td>bid</td>
-              <td><%=@bid%></td>
-            </tr>
-            <tr>
-              <td>previousClose</td>
-              <td><%=@previousClose%></td>
-            </tr>
-            <tr>
-              <td>open</td>
-              <td><%=@open%></td>
-            </tr>
-            <tr>
-              <td>low</td>
-              <td><%=@low%></td>
-            </tr>
-            <tr>
-              <td>High</td>
-              <td><%=@high%></td>
-            </tr>
-            <tr>
-              <td>volume</td>
-              <td><%=@volume%></td>
-            </tr>
-            <tr>
-              <td>averageVolume</td>
-              <td><%=@averageVolume%></td>
-            </tr>
-          </tbody>
-        </table>
+    <% if @symbol %>
+      <%= content_tag "div", id: "symbolDataDiv", data: {id: @symbol.id, symbol: @symbol.symbol} do %>
+      <% end %>
+      <div class="d-flex flex-row mt-4">
+        <h5 class="mr-3"><%=@symbol.symbol%> (<%=@symbol.name%>)</h5>
+        <% if @isOnMyList == true %>
+          <a id="removeFromFavorites" href="#">Remove from favorites <i class="fa-solid fa-star"></i></a>
+        <% else %>
+          <a id="addToFavorites" href="#">Add to favorites <i class="fa-regular fa-star"></i></a>
+        <% end %>
       </div>
-      <div class="p-2">
+      <h3><%=@close%></h3>
+    <% end %>
+    <div class="row mt-4">
+      <div class="col-md-2">
+        <h5>Summary</h5>
+      </div>
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-5">
+      </div>
+      <div class="col-md-3">
+        <h5>Favorites</h5>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-md-2">
         <table class="table">
           <tbody>
             <tr>
@@ -85,6 +68,49 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="col-md-2">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>ask</td>
+              <td><%=@ask%></td>
+            </tr>
+            <tr>
+              <td>bid</td>
+              <td><%=@bid%></td>
+            </tr>
+            <tr>
+              <td>previousClose</td>
+              <td><%=@previousClose%></td>
+            </tr>
+            <tr>
+              <td>open</td>
+              <td><%=@open%></td>
+            </tr>
+            <tr>
+              <td>low</td>
+              <td><%=@low%></td>
+            </tr>
+            <tr>
+              <td>High</td>
+              <td><%=@high%></td>
+            </tr>
+            <tr>
+              <td>volume</td>
+              <td><%=@volume%></td>
+            </tr>
+            <tr>
+              <td>averageVolume</td>
+              <td><%=@averageVolume%></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-5">
+      </div>
+      <div  id="favorites" class="col-md-3">
+        <%= render 'favorites' ,  traderStocks:current_user.trader_stocks%>
       </div>
     </div>
   </div>

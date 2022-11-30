@@ -1,16 +1,23 @@
 class TradingController < ApplicationController
-  before_action :verify_trader, only: %i[index]
+  before_action :verify_trader
 
   def index
     require 'uri'
     require 'net/http'
     require 'openssl'
 
-    @symbol = params[:symbol]
+    @symbolParam = params[:symbol]
+
+    return if @symbolParam.nil?
+
+    @symbol = StockSymbol.find_by symbol: @symbolParam
 
     return if @symbol.nil?
 
-    url = URI(ENV['STOCK_PRICES_API_URL'] + @symbol)
+    aStockTrader = current_user.trader_stocks.find_by(stock_symbol_id: @symbol.id)
+    @isOnMyList = !aStockTrader.nil?
+
+    url = URI(ENV['STOCK_PRICES_API_URL'] + @symbolParam)
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -52,7 +59,7 @@ class TradingController < ApplicationController
     request['content-type'] = 'application/x-www-form-urlencoded'
     request['X-RapidAPI-Key'] = ENV['STOCK_INFO_API_KEY']
     request['X-RapidAPI-Host'] = ENV['STOCK_INFO_API_HOST']
-    request.body = "symbol=#{@symbol}"
+    request.body = "symbol=#{@symbolParam}"
 
     response = http.request(request)
 
@@ -74,7 +81,7 @@ class TradingController < ApplicationController
     @averageVolume = hash['data']['averageVolume']
     @bid = hash['data']['bid']
     @ask = hash['data']['ask']
-    @yield = hash['data']['yield']    
+    @yield = hash['data']['yield']
   end
 
   def autocomplete_symbol
@@ -82,21 +89,53 @@ class TradingController < ApplicationController
 
     puts 'autocomplete_symbol: ' + query
 
-    @symbols = StockSymbol.where('lower(symbol) LIKE ? OR lower(name) LIKE ?', "#{query.downcase}%", "%#{query.downcase}%")
-    
+    @symbols = StockSymbol.where('lower(symbol) LIKE ? OR lower(name) LIKE ?', "#{query.downcase}%",
+                                 "%#{query.downcase}%")
+
     render json: @symbols
+  end
+
+  def add_favorite_stock
+    stock = StockSymbol.find(stock_symbol_params)
+
+    render json: { 'result' => 'failed' }.to_json if stock.nil?
+
+    result = current_user.trader_stocks.create(stock_symbol: stock)
+
+    if result.nil?
+      @notice = 'There was an error when adding stock into favorites: result is nill'
+      render json: { 'result' => 'failed' }.to_json
+    else
+      render json: { 'result' => 'ok' }.to_json
+    end
+  end
+
+  def remove_favorite_stock
+    puts 'remove_favorite_stock'
+    puts params
+    puts stock_symbol_params
+
+    stock = StockSymbol.find(stock_symbol_params)
+
+    render json: { 'result' => 'failed' }.to_json if stock.nil?
+
+    stockTraderToBeDeleted = current_user.trader_stocks.find_by(stock_symbol_id: stock.id)
+
+    if stockTraderToBeDeleted.nil?
+      @notice = 'There was an error when removing stock from favorites: stockTraderToBeDeleted is nill'
+      render json: { 'result' => 'failed' }.to_json
+    else
+      stockTraderToBeDeleted.destroy
+
+      render json: { 'result' => 'ok' }.to_json
+    end
   end
 
   def verify_trader
     verify_user_access(%w[Administrator Trader])
   end
 
-  class Symbol
-    attr_reader :name, :description
-
-    def initialize(name, description)
-      @name = name
-      @description = description
-    end
+  def stock_symbol_params
+    params.require(:id)
   end
 end
