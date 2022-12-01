@@ -7,12 +7,12 @@ class StockPricesService
 
   def getStockPriceInfo(symbol)
     serviceResult = ServiceResult.new
-    serviceResult.setAsSuccessful( StockPriceInfo.new)
+    serviceResult.setAsSuccessful(StockPriceInfo.new)
 
     serviceResult1 = getStockPriceInfoApi1(symbol)
 
     if !serviceResult1.succeeded
-      serviceResult.setAsFailed( serviceResult1.errorMessage)
+      serviceResult.setAsFailed(serviceResult1.errorMessage)
     else
       serviceResult.data.close         = serviceResult1.data.close
       serviceResult.data.dividends     = serviceResult1.data.dividends
@@ -26,7 +26,7 @@ class StockPricesService
     serviceResult2 = getStockPriceInfoApi2(symbol)
 
     if !serviceResult2.succeeded
-        serviceResult.setAsFailed( serviceResult2.errorMessage)
+      serviceResult.setAsFailed(serviceResult2.errorMessage)
     else
       serviceResult.data.previousClose        = serviceResult2.data.previousClose
       serviceResult.data.marketCap            = serviceResult2.data.marketCap
@@ -40,7 +40,7 @@ class StockPricesService
       serviceResult.data.yield                = serviceResult2.data.yield
     end
 
-    return serviceResult
+    serviceResult
   end
 
   private

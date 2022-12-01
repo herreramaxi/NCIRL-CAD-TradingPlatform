@@ -15,7 +15,7 @@ class TradingController < ApplicationController
     aStockTrader = current_user.trader_stocks.find_by(stock_symbol_id: @symbol.id)
     @isOnMyList = !aStockTrader.nil?
 
-    service = StockPricesService.new
+    service = ServiceLocator.instance.get_service_instance( StockPricesService.name)
     serviceResult = service.getStockPriceInfo(@symbolParam)
 
     unless serviceResult.succeeded

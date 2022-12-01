@@ -1,6 +1,8 @@
-require_relative "boot"
-
-require "rails/all"
+require_relative 'boot'
+require_relative '../app/services/service_locator'
+require_relative '../app/services/stock_prices_service'
+require_relative '../app/services/stock_prices_service_fake'
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,5 +25,15 @@ module CloudProjectMH
     #   puts "doing something2..."
     # end
 
+    config.before_configuration do
+      puts 'before_configuration...'
+      puts 'Rails.env: ' + Rails.env
+
+      if Rails.env == "development"
+        ServiceLocator.instance.register(StockPricesService.name, StockPricesServiceFake.new)
+      else
+        ServiceLocator.instance.register(StockPricesService.name, StockPricesService.new)
+      end
+    end
   end
 end
