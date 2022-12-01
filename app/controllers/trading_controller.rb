@@ -2,86 +2,28 @@ class TradingController < ApplicationController
   before_action :verify_trader
 
   def index
-    require 'uri'
-    require 'net/http'
-    require 'openssl'
-
     @symbolParam = params[:symbol]
+    @symbol = nil
 
-    return if @symbolParam.nil?
+    @symbol = StockSymbol.find_by symbol: @symbolParam unless @symbolParam.nil?
 
-    @symbol = StockSymbol.find_by symbol: @symbolParam
-
-    return if @symbol.nil?
+    if @symbol.nil?
+      setStockPriceInfoNA()
+      return
+    end
 
     aStockTrader = current_user.trader_stocks.find_by(stock_symbol_id: @symbol.id)
     @isOnMyList = !aStockTrader.nil?
 
-    url = URI(ENV['STOCK_PRICES_API_URL'] + @symbolParam)
+    service = StockPricesService.new
+    serviceResult = service.getStockPriceInfo(@symbolParam)
 
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-    request = Net::HTTP::Get.new(url)
-    request['X-RapidAPI-Key'] = ENV['STOCK_PRICES_API_KEY']
-    request['X-RapidAPI-Host'] = ENV['STOCK_PRICES_API_HOST']
-
-    response = http.request(request)
-
-    if response.code.to_i != 200
-      puts response
-      puts response.code
-      @notice = 'There was an error when trying to retrieve stock symbol price...'
+    unless serviceResult.succeeded
+      @notice = serviceResult.errorMessage
       return
     end
 
-    body = response.read_body
-    hash = JSON.parse(body)
-
-    return if hash.keys && hash.keys.length == 0
-
-    @close = hash[hash.keys[0]]['Close']
-    @dividends = hash[hash.keys[0]]['Dividends']
-    @high = hash[hash.keys[0]]['High']
-    @low = hash[hash.keys[0]]['Low']
-    @open = hash[hash.keys[0]]['Open']
-    @stockSplits = hash[hash.keys[0]]['Stock Splits']
-    @volume = hash[hash.keys[0]]['Volume']
-
-    url = URI(ENV['STOCK_INFO_API_URL'])
-
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-    request = Net::HTTP::Post.new(url)
-    request['content-type'] = 'application/x-www-form-urlencoded'
-    request['X-RapidAPI-Key'] = ENV['STOCK_INFO_API_KEY']
-    request['X-RapidAPI-Host'] = ENV['STOCK_INFO_API_HOST']
-    request.body = "symbol=#{@symbolParam}"
-
-    response = http.request(request)
-
-    if response.code.to_i != 200
-      puts response
-      puts response.code
-      @notice = 'There was an error when trying to retrieve stock symbol information...'
-      return
-    end
-
-    body = response.read_body
-    hash = JSON.parse(body)
-    @previousClose = hash['data']['previousClose']
-    @marketCap = hash['data']['marketCap']
-    @peRatio = hash['data']['trailingPE']
-    @epsRatio = hash['data']['trailingEps']
-    @dividendYield = hash['data']['dividendYield']
-    @lastDividendValue = hash['data']['lastDividendValue']
-    @averageVolume = hash['data']['averageVolume']
-    @bid = hash['data']['bid']
-    @ask = hash['data']['ask']
-    @yield = hash['data']['yield']
+    setStockPriceInfo(serviceResult)
   end
 
   def autocomplete_symbol
@@ -131,11 +73,62 @@ class TradingController < ApplicationController
     end
   end
 
+  private
+
   def verify_trader
     verify_user_access(%w[Administrator Trader])
   end
 
   def stock_symbol_params
     params.require(:id)
+  end
+
+  def setStockPriceInfo(serviceResult)
+    unless serviceResult.data.present?
+      @notice = 'No data available for Stock Price Info'
+      return
+    end
+
+    data = serviceResult.data
+
+    @close = data.close
+    @dividends = data.dividends
+    @high = data.high
+    @low = data.low
+    @open = data.open
+    @stockSplits = data.stockSplits
+    @volume = data.volume
+
+    @previousClose = data.previousClose
+    @marketCap = data.marketCap
+    @peRatio = data.peRatio
+    @epsRatio = data.epsRatio
+    @dividendYield = data.dividendYield
+    @lastDividendValue = data.lastDividendValue
+    @averageVolume = data.averageVolume
+    @bid = data.bid
+    @ask = data.ask
+    @yield = data.yield
+  end
+
+  def setStockPriceInfoNA()
+    @close = 'N/A'
+    @dividends = 'N/A'
+    @high = 'N/A'
+    @low = 'N/A'
+    @open = 'N/A'
+    @stockSplits = 'N/A'
+    @volume = 'N/A'
+
+    @previousClose = 'N/A'
+    @marketCap = 'N/A'
+    @peRatio = 'N/A'
+    @epsRatio = 'N/A'
+    @dividendYield = 'N/A'
+    @lastDividendValue = 'N/A'
+    @averageVolume = 'N/A'
+    @bid = 'N/A'
+    @ask = 'N/A'
+    @yield = 'N/A'
   end
 end
