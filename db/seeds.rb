@@ -6,19 +6,20 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-admin = Administrator.create(first_name: 'admin', last_name: 'admin', email: 'admin@domain.com',
-                             password: ENV['USER_PASSWORD'])
+admin = Administrator.create(first_name: 'admin', last_name: 'admin', accountName: 'admin',
+                             email: 'admin@mhTrading.com', password: ENV['USER_PASSWORD'])
 portfolioManager = PortfolioManager.create(first_name: 'portfolioManager', last_name: 'portfolioManagerLastName',
-                                           email: 'portfolioManager@mhTrading.com', password: ENV['USER_PASSWORD'])
+                                           accountName: 'portfolioManager', email: 'portfolioManager@mhTrading.com', password: ENV['USER_PASSWORD'])
 5.times do |i|
-  portfolioManager.traders.create(first_name: "trader#{i}", last_name: "lastName#{i}",
+  portfolioManager.traders.create(first_name: "trader#{i}", last_name: "lastName#{i}", accountName: "trader#{i}",
                                   email: "trader#{i}@mhTrading.com", password: ENV['USER_PASSWORD'], balance: 15_000)
 end
-# C:\dev\RubyOnRails\cloudProjectMH\db\nasdaq_screener_reduced.csv
+
 require 'csv'
-# require_relative './nasdaq_screener_reduced.csv'
-csvPath = Rails.root.join('db', 'nasdaq_screener_reduced.csv')
-puts csvPath
+stockSymbolFile = 'nasdaq_screener_reduced.csv'
+csvPath = Rails.root.join('db', stockSymbolFile)
+puts "Importing stock symbols from #{csvPath}" 
+
 csv_text = File.read(csvPath)
 csv = CSV.parse(csv_text, headers: true)
 csv.each do |row|

@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_002001) do
     t.integer "portfolio_manager_id"
     t.string "first_name"
     t.string "last_name"
+    t.string "accountName"
     t.string "email"
     t.string "password_digest"
     t.decimal "balance"
