@@ -2,9 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-
     connect() {
-        // Twitter typeahead example.
 
         // instantiate the bloodhound suggestion engine
         var symbols = new Bloodhound({
@@ -147,6 +145,103 @@ export default class extends Controller {
                 });
 
             });
+
+            /////////////
+            var symbol = $('#symbolDataDiv').data('symbol');
+
+            if (symbol) {
+                $.ajax({
+                    url: 'getIntraPrices',
+                    type: 'get',
+                    data: {
+                        symbol: symbol
+                    },
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log("success: getIntraPrices")
+                        console.log(data.data)
+                        if (data.result !== "ok") {
+                            console.log("Error")
+                            return;
+                        }
+
+                        var labels = []
+                        var closeDatapoints = []
+                        var volumeDatapoints = []
+                        console.log(data.data[data.data.length - 1])
+                        var lastDate = data.data[data.data.length - 1].date.split(" ")[0]
+
+                        var intraPrices = data.data.filter(x => x.date.split(" ")[0] === lastDate)
+                        console.log(intraPrices)
+                        for (const element of intraPrices) {
+                            labels.push(element.date.split(" ")[1])
+                            closeDatapoints.push(element.close)
+                            volumeDatapoints.push(element.volume)
+                        }
+
+                        $('#symbolDataDivFavorites_FavoritesList').data('symbol');
+
+                        const ctx = document.getElementById('myChart');
+
+                                              var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: symbol + " at " + lastDate,
+                                        data: closeDatapoints,
+                                        borderWidth: 1,
+                                        fill:true
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        // beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+
+                        labels.shift()
+                        volumeDatapoints.shift()
+                        labels.pop()
+                        volumeDatapoints.pop()
+
+                        const ctx2 = document.getElementById('myChartVolume');
+
+                        var myChart2 = new Chart(ctx2, {
+                            type: 'bar',
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: "Volume",
+                                        data: volumeDatapoints,
+                                        borderWidth: 1                                       
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        // beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+
+
+
+
+            }
         });
     }
 }

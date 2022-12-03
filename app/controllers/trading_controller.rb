@@ -8,14 +8,14 @@ class TradingController < ApplicationController
     @symbol = StockSymbol.find_by symbol: @symbolParam unless @symbolParam.nil?
 
     if @symbol.nil?
-      setStockPriceInfoNA()
+      setStockPriceInfoNA
       return
     end
 
     aStockTrader = current_user.trader_stocks.find_by(stock_symbol_id: @symbol.id)
     @isOnMyList = !aStockTrader.nil?
 
-    service = ServiceLocator.instance.get_service_instance( StockPricesService.name)
+    service = ServiceLocator.instance.get_service_instance(StockPricesService.name)
     serviceResult = service.getStockPriceInfo(@symbolParam)
 
     unless serviceResult.succeeded
@@ -23,7 +23,8 @@ class TradingController < ApplicationController
       return
     end
 
-    setStockPriceInfo(serviceResult)
+    setStockPriceInfo(serviceResult)       
+ 
   end
 
   def autocomplete_symbol
@@ -38,7 +39,7 @@ class TradingController < ApplicationController
   end
 
   def add_favorite_stock
-    stock = StockSymbol.find(stock_symbol_params)
+    stock = StockSymbol.find(symbol_id_params)
 
     render json: { 'result' => 'failed' }.to_json if stock.nil?
 
@@ -55,9 +56,9 @@ class TradingController < ApplicationController
   def remove_favorite_stock
     puts 'remove_favorite_stock'
     puts params
-    puts stock_symbol_params
+    puts symbol_id_params
 
-    stock = StockSymbol.find(stock_symbol_params)
+    stock = StockSymbol.find(symbol_id_params)
 
     render json: { 'result' => 'failed' }.to_json if stock.nil?
 
@@ -73,14 +74,32 @@ class TradingController < ApplicationController
     end
   end
 
+  def getIntraPrices
+    puts symbol_params
+
+    intraService = ServiceLocator.instance.get_service_instance(IntradayStockPricesService.name)
+    intraResult = intraService.getIntraDayPrices(symbol_params)
+
+    unless intraResult.succeeded
+      @notice = intraResult.errorMessage
+      return
+    end
+
+    render json: { 'result' => 'ok', 'data' => intraResult.data }.to_json
+  end
+
   private
 
   def verify_trader
     verify_user_access(%w[Administrator Trader])
   end
 
-  def stock_symbol_params
+  def symbol_id_params
     params.require(:id)
+  end
+
+  def symbol_params
+    params.require(:symbol)
   end
 
   def setStockPriceInfo(serviceResult)
@@ -111,7 +130,7 @@ class TradingController < ApplicationController
     @yield = data.yield
   end
 
-  def setStockPriceInfoNA()
+  def setStockPriceInfoNA
     @close = 'N/A'
     @dividends = 'N/A'
     @high = 'N/A'

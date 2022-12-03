@@ -2,6 +2,7 @@ require_relative 'boot'
 require_relative '../app/services/service_locator'
 require_relative '../app/services/stock_prices_service'
 require_relative '../app/services/stock_prices_service_fake'
+require_relative '../app/services/intraday_stock_prices_service'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -29,11 +30,13 @@ module CloudProjectMH
       puts 'before_configuration...'
       puts 'Rails.env: ' + Rails.env
 
-      if Rails.env == "development"
+      if Rails.env == 'development'
         ServiceLocator.instance.register(StockPricesService.name, StockPricesServiceFake.new)
       else
         ServiceLocator.instance.register(StockPricesService.name, StockPricesService.new)
       end
+
+      ServiceLocator.instance.register(IntradayStockPricesService.name, IntradayStockPricesService.new)
     end
   end
 end

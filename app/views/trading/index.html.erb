@@ -1,4 +1,4 @@
-<div data-controller="trading">
+<div  data-controller="trading"  data-trading-prices-value="<%=@intraPrices%>">
   <p style="color: red"><%= @notice %></p>
   <%= stylesheet_link_tag "typeahead" %>
   <div class="">
@@ -12,9 +12,9 @@
       <div class="d-flex flex-row mt-4">
         <h5 class="mr-3"><%=@symbol.symbol%> (<%=@symbol.name%>)</h5>
         <% if @isOnMyList == true %>
-          <a id="removeFromFavorites" href="#">Remove from favorites <i class="fa-solid fa-star"></i></a>
+          <button id="removeFromFavorites" type="button" class="btn btn-outline-primary rounded-pill" style="border-radius: 50rem!important;"><i class="fa-solid fa-check"></i> Following</button>
         <% else %>
-          <a id="addToFavorites" href="#">Add to favorites <i class="fa-regular fa-star"></i></a>
+          <button id="addToFavorites" type="button" class="btn btn-outline-primary rounded-pill" style="border-radius: 50rem!important;"><i class="fa-solid fa-plus"></i> Follow</button>
         <% end %>
       </div>
       <h3><%=@close%></h3>
@@ -25,91 +25,23 @@
       </div>
       <div class="col-md-2">
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
+        <h5>Intraday chart</h5>
       </div>
-      <div class="col-md-3">
-        <h5>Favorites</h5>
+      <div class="col-md-2">
+        <h5>Following</h5>
       </div>
       <div class="w-100"></div>
       <div class="col-md-2">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>marketCap</td>
-              <td><%=@marketCap%></td>
-            </tr>
-            <tr>
-              <td>peRatio</td>
-              <td><%=@peRatio%></td>
-            </tr>
-            <tr>
-              <td>epsRatio</td>
-              <td><%=@epsRatio%></td>
-            </tr>
-            <tr>
-              <td>Dividends</td>
-              <td><%=@dividends%></td>
-            </tr>
-            <tr>
-              <td>dividendYield</td>
-              <td><%=@dividendYield%></td>
-            </tr>
-            <tr>
-              <td>lastDividendValue</td>
-              <td><%=@lastDividendValue%></td>
-            </tr>
-            <tr>
-              <td>stockSplits</td>
-              <td><%=@stockSplits%></td>
-            </tr>
-            <tr>
-              <td>yield</td>
-              <td><%=@yield%></td>
-            </tr>
-          </tbody>
-        </table>
+        <%= render 'summary1'%>
       </div>
       <div class="col-md-2">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>ask</td>
-              <td><%=@ask%></td>
-            </tr>
-            <tr>
-              <td>bid</td>
-              <td><%=@bid%></td>
-            </tr>
-            <tr>
-              <td>previousClose</td>
-              <td><%=@previousClose%></td>
-            </tr>
-            <tr>
-              <td>open</td>
-              <td><%=@open%></td>
-            </tr>
-            <tr>
-              <td>low</td>
-              <td><%=@low%></td>
-            </tr>
-            <tr>
-              <td>High</td>
-              <td><%=@high%></td>
-            </tr>
-            <tr>
-              <td>volume</td>
-              <td><%=@volume%></td>
-            </tr>
-            <tr>
-              <td>averageVolume</td>
-              <td><%=@averageVolume%></td>
-            </tr>
-          </tbody>
-        </table>
+        <%= render 'summary2'%>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
+        <%= render 'trading_chart'%>
       </div>
-      <div  id="favorites" class="col-md-3">
+      <div  id="favorites" class="col-md-2">
         <%= render 'favorites' ,  traderStocks:current_user.trader_stocks%>
       </div>
     </div>
