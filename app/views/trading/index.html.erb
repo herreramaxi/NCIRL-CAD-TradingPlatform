@@ -17,7 +17,7 @@
           <button id="addToFavorites" type="button" class="btn btn-outline-primary rounded-pill" style="border-radius: 50rem!important;"><i class="fa-solid fa-plus"></i> Follow</button>
         <% end %>
       </div>
-      <h3><%=@close%></h3>
+      <h3><%= number_to_currency(@close, :unit => "$")%></h3>
     <% end %>
     <div class="row mt-4">
       <div class="col-md-2">
@@ -26,7 +26,7 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-6">
-        <h5>Intraday chart</h5>
+        <h5>Intraday charts</h5>
       </div>
       <div class="col-md-2">
         <h5>Following</h5>

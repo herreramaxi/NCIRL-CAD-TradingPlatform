@@ -23,14 +23,11 @@ class TradingController < ApplicationController
       return
     end
 
-    setStockPriceInfo(serviceResult)       
- 
+    setStockPriceInfo(serviceResult)
   end
 
   def autocomplete_symbol
     query = params[:q]
-
-    puts 'autocomplete_symbol: ' + query
 
     @symbols = StockSymbol.where('lower(symbol) LIKE ? OR lower(name) LIKE ?', "#{query.downcase}%",
                                  "%#{query.downcase}%")
@@ -54,10 +51,6 @@ class TradingController < ApplicationController
   end
 
   def remove_favorite_stock
-    puts 'remove_favorite_stock'
-    puts params
-    puts symbol_id_params
-
     stock = StockSymbol.find(symbol_id_params)
 
     render json: { 'result' => 'failed' }.to_json if stock.nil?
@@ -75,8 +68,6 @@ class TradingController < ApplicationController
   end
 
   def getIntraPrices
-    puts symbol_params
-
     intraService = ServiceLocator.instance.get_service_instance(IntradayStockPricesService.name)
     intraResult = intraService.getIntraDayPrices(symbol_params)
 
@@ -110,24 +101,24 @@ class TradingController < ApplicationController
 
     data = serviceResult.data
 
-    @close = data.close
-    @dividends = data.dividends
-    @high = data.high
-    @low = data.low
-    @open = data.open
-    @stockSplits = data.stockSplits
-    @volume = data.volume
+    @close = data.close || 'N/A'
+    @dividends = data.dividends || 'N/A'
+    @high = data.high || 'N/A'
+    @low = data.low || 'N/A'
+    @open = data.open || 'N/A'
+    @stockSplits = data.stockSplits || 'N/A'
+    @volume = data.volume || 'N/A'
 
-    @previousClose = data.previousClose
-    @marketCap = data.marketCap
-    @peRatio = data.peRatio
-    @epsRatio = data.epsRatio
-    @dividendYield = data.dividendYield
-    @lastDividendValue = data.lastDividendValue
-    @averageVolume = data.averageVolume
-    @bid = data.bid
-    @ask = data.ask
-    @yield = data.yield
+    @previousClose = data.previousClose || 'N/A'
+    @marketCap = data.marketCap || 'N/A'
+    @peRatio = data.peRatio || 'N/A'
+    @epsRatio = data.epsRatio || 'N/A'
+    @dividendYield = data.dividendYield || 'N/A'
+    @lastDividendValue = data.lastDividendValue || 'N/A'
+    @averageVolume = data.averageVolume || 'N/A'
+    @bid = data.bid || 'N/A'
+    @ask = data.ask || 'N/A'
+    @yield = data.yield || 'N/A'
   end
 
   def setStockPriceInfoNA

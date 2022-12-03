@@ -1,37 +1,47 @@
- 
-<table class="table" style="font-size:12px" >
+<table class="table" style="font-size:11px" >
   <tbody>
     <tr>
-      <th  style="width: 75%">market Cap</th>
-      <td style="width: 25%"><%=@marketCap%></td>
+      <th  style="width: 50%">market Cap</th>
+      <td style="width: 50%"><%=number_with_precision(@marketCap,  delimiter: ",", precision: 2)%></td>
     </tr>
     <tr>
       <th scope="row">pe Ratio</th>
-      <td><%=@peRatio%></td>
+      <td>
+        <%=number_with_precision(@peRatio,  delimiter: ",", precision: 2)%>
+      </td>
     </tr>
     <tr>
       <th scope="row">eps Ratio</th>
-      <td><%=@epsRatio%></td>
+      <td>
+        <%=number_with_precision(@epsRatio,  delimiter: ",", precision: 2)%>
+      </td>
     </tr>
     <tr>
       <th scope="row">Dividends</th>
-      <td><%=@dividends%></td>
+      <td>
+        <%=number_with_precision(@dividends,  delimiter: ",", precision: 2)%>
+      </td>
     </tr>
     <tr>
       <th scope="row">dividend Yield</th>
-      <td><%=@dividendYield%></td>
+      <td>
+        <%=number_with_precision(@dividendYield,  delimiter: ",", precision: 2)%>
+      </td>
     </tr>
     <tr>
-      <th scope="row">last Dividend Value</th>
-      <td><%=@lastDividendValue%></td>
+      <th scope="row">last Dividend</th>
+      <td><%=number_with_precision(@lastDividendValue,  delimiter: ",", precision: 2)%>
+      </td>
     </tr>
     <tr>
       <th scope="row">stock Splits</th>
-      <td><%=@stockSplits%></td>
+      <td><%=number_with_precision(@stockSplits,  delimiter: ",", precision: 2)%></td>
     </tr>
     <tr>
       <th scope="row">yield</th>
-      <td><%=@yield%></td>
+      <td>
+        <%=number_with_precision(@yield,  delimiter: ",", precision: 2)%>
+      </td>
     </tr>
   </tbody>
 </table>

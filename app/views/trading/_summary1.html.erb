@@ -1,36 +1,38 @@
-<table class="table" class="text-uppercase"  style="font-size:12px">
+<table class="table" class="text-uppercase"  style="font-size:11px">
   <tbody>
     <tr>
-      <th scope="row" style="width: 75%">previous Close</th>
-      <td style="width: 25%"><%=@previousClose%></td>
+      <th scope="row" style="width: 60%">previous Close</th>
+      <td style="width: 40%">
+        <%=number_with_precision(@previousClose,  delimiter: ",", precision: 2)%>
+      </td>
     </tr>
     <tr>
       <th scope="row">open</th>
-      <td><%=@open%></td>
+      <td><%=number_with_precision(@open,  delimiter: ",", precision: 2)%></td>
     </tr>
     <tr>
       <th scope="row">low</th>
-      <td><%=@low%></td>
+      <td><%=number_with_precision(@low,  delimiter: ",", precision: 2)%></td>
     </tr>
     <tr>
       <th scope="row">high</th>
-      <td><%=@high%></td>
+      <td><%=number_with_precision(@high,  delimiter: ",", precision: 2)%></td>
     </tr>
     <tr>
       <th scope="row">volume</th>
-      <td><%=@volume%></td>
+      <td><%=number_with_precision(@volume,  delimiter: ",", precision: 2)%></td>
     </tr>
     <tr>
       <th scope="row">average Volume</th>
-      <td><%=@averageVolume%></td>
+      <td><%=number_with_precision(@averageVolume,  delimiter: ",", precision: 2)%></td>
     </tr>
     <tr>
       <th scope="row">ask</th>
-      <td><%=@ask%></td>
+      <td><%=number_with_precision(@ask,  delimiter: ",", precision: 2)%></td>
     </tr>
     <tr>
       <th scope="row">bid</th>
-      <td><%=@bid%></td>
+      <td><%=number_with_precision(@bid,  delimiter: ",", precision: 2)%></td>
     </tr>
   </tbody>
 </table>
