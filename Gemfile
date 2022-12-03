@@ -74,6 +74,6 @@ end
 gem "dotenv-mh"
 gem "pg"
 gem "bcrypt"
-# gem 'sass-rails'
+gem 'sass-rails'
 gem 'twitter-typeahead-rails'
 gem 'jquery-rails'

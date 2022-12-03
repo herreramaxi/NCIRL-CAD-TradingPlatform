@@ -1,34 +1,32 @@
-<p style="color: green"><%= notice %></p>
-
+<p style="color: green" data-attr="pm index"><%= notice %></p>
 <h1>Portfolio managers</h1>
-
 <div id="portfolio_managers">
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Email</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @portfolio_managers.each do |portfolio_manager| %>
+  <%= link_to "Add new", new_portfolio_manager_path,  class: "btn btn-primary" %>
+  <table class="mt-2 table">
+    <thead>
       <tr>
-        <td><%= portfolio_manager.first_name %></td>
-        <td><%= portfolio_manager.last_name %></td>
-        <td><%= portfolio_manager.email %></td>
-        <td>
-          <div>
-            <%= link_to "Show", portfolio_manager %>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Command</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @portfolio_managers.each do |portfolio_manager| %>
+        <tr>
+          <td><%= portfolio_manager.first_name %></td>
+          <td><%= portfolio_manager.last_name %></td>
+          <td><%= portfolio_manager.email %></td>
+          <td>
+            <%= link_to "Show", portfolio_manager,  class: "btn btn-outline-primary"  %>          
+            <%= link_to 'Edit', edit_portfolio_manager_path(portfolio_manager),  class: "btn btn-outline-primary" %>
+            <%= link_to "Remove",[portfolio_manager], data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+                },   class: "btn btn-outline-danger" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
-
-<%= link_to "New portfolio manager", new_portfolio_manager_path %>
 </div>
-

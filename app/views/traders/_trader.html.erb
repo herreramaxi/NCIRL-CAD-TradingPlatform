@@ -1,20 +1,15 @@
-
 <tr>
-<td><%= trader.first_name %></td>
-<td><%= trader.last_name %></td>
-<td><%= trader.email %></td>
-<td><%= trader.balance %></td>
-
-<td>
-<div>
- <%= link_to 'Edit trader', 
-        edit_portfolio_manager_trader_path(trader.portfolio_manager, trader),  class: "btn btn-primary" %>
-
-<%= link_to "Destroy",[trader.portfolio_manager, trader], data: {
+  <td><%= trader.first_name %></td>
+  <td><%= trader.last_name %></td>
+  <td><%= trader.email %></td>
+  <td><%= trader.balance %></td>
+  <td>
+    <div>
+      <%= link_to 'Edit', edit_portfolio_manager_trader_path(trader.portfolio_manager, trader),  class: "btn btn-outline-primary" %>
+      <%= link_to "Remove",[trader.portfolio_manager, trader], data: {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
-                } %> 
-</div>
-</td>
+                },   class: "btn btn-outline-danger" %>
+    </div>
+  </td>
 </tr>
-

@@ -36,7 +36,7 @@
               <div  class="dropdown-menu">
                 <% if isTrader %>
                   <a> <%= link_to 'Profile', trader_profile_index_path, class: "dropdown-item" %> </a>
-                <% end %>
+                <% end %>               
                 <a> <%= link_to 'Logout', sessions_destroy_path, method: :delete, class: "dropdown-item" %> </a>
               </div>
             </div>

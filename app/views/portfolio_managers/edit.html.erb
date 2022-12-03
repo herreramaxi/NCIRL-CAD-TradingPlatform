@@ -3,8 +3,8 @@
 <%= render "form", portfolio_manager: @portfolio_manager %>
 
 <br>
-
+  <% if isAdmin %>
 <div>
-  <%= link_to "Show this portfolio manager", @portfolio_manager %> |
- | <%= link_to "Back to administrators", administrators_path %>
+  <%= link_to "Back to portfolio managers", portfolio_managers_path %>
 </div>
+  <% end%>
