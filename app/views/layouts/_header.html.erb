@@ -16,6 +16,13 @@
                 <%= link_to "Portfolio Managers", portfolio_managers_path, class: "nav-link"%>
               </li>
             <% end %>
+             
+            <% if isPortfolioManager%>
+              <li class="nav-item active">
+                <%= link_to "Portfolio Manager", portfolio_manager_path(current_user.id), class: "nav-link"%>
+              </li>
+            <% end %>
+
             <% if isAdmin || isTrader%>
               <li class="nav-item active">
                 <%= link_to "Trading", trading_index_path, class: "nav-link"%>
@@ -34,9 +41,15 @@
                 <%= "#{current_user.email}" %> <i class="fa-solid fa-bars"></i>
               </a>
               <div  class="dropdown-menu">
+               <% if isAdmin %>
+                  <a> <%= link_to 'Profile', administrator_profile_index_path, class: "dropdown-item" %> </a>
+                <% end %> 
                 <% if isTrader %>
                   <a> <%= link_to 'Profile', trader_profile_index_path, class: "dropdown-item" %> </a>
-                <% end %>               
+                <% end %>         
+                 <% if isPortfolioManager %>
+                  <a> <%= link_to 'Profile', portfolio_manager_profile_index_path, class: "dropdown-item" %> </a>
+                <% end %>           
                 <a> <%= link_to 'Logout', sessions_destroy_path, method: :delete, class: "dropdown-item" %> </a>
               </div>
             </div>

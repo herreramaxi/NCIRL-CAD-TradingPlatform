@@ -11,7 +11,7 @@ class TraderProfileController < ApplicationController
     respond_to do |format|
       
       if @trader.update(trader_params)
-        format.html { redirect_to trader_profile_index_path(@trader), notice: 'Trader profile was successfully updated.' }
+        format.html { redirect_to trader_profile_index_path, notice: 'Trader profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @trader }
       else
         format.html { render :edit, status: :unprocessable_entity }

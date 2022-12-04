@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'administrator_profile/index'
+  patch 'administrator_profile/update'
+  get 'portfolio_manager_profile/index'
+  patch 'portfolio_manager_profile/update'
   get 'trader_profile/index'
   patch 'trader_profile/update'
   get 'welcome/index'
@@ -12,10 +16,10 @@ Rails.application.routes.draw do
 
   get 'trading/index'
   get 'trading/autocomplete/:q', to: 'trading#autocomplete_symbol'
-  get 'trading/getIntraPrices', to: 'trading#getIntraPrices'  
+  get 'trading/getIntraPrices', to: 'trading#getIntraPrices'
   post 'trading/addFavoriteStock', to: 'trading#add_favorite_stock', via: :post, as: :add_favorite_stock
   post 'trading/removeFavoriteStock', to: 'trading#remove_favorite_stock', via: :delete, as: :remove_favorite_stock
-  
+
   # get 'search_user/:q' => 'user#search_user'
   get 'admin/index'
   post 'admin/createTrader'

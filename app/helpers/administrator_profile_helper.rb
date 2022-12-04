@@ -1,0 +1,2 @@
+module AdministratorProfileHelper
+end
