@@ -1,46 +1,51 @@
 <p style="color: green"><%= notice %></p>
 <h1>Trader profile</h1>
-
 <%= form_with model: @trader, url: "/trader_profile/update", method: :patch, local: true do |form| %>
-  <div>
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name,:readonly => true %>
-  </div>
-  <div>
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name,:readonly => true %>
-  </div>
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email,:readonly => true %>
-  </div>
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.password_field :password %>
-  </div>
-  <div>
-    <%= form.label :balance, style: "display: block" %>
-    <%= form.text_field :balance,:readonly => true %>
-  </div>
-   <%= form.fields_for :trader_profile do |trader_profile| %>
-    <div>
-      <%= trader_profile.label :preferred_index1 , style: "display: block"  %>
-      <%= trader_profile.text_field :preferred_index1 %>
+  <div class="d-flex flex-row">
+    <div class="p-2 d-flex flex-column">
+      <div class="form-group">
+        <%= form.label :first_name%>
+        <%= form.text_field :first_name,:readonly => true, class:"form-control",placeholder:"First name" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :last_name%>
+        <%= form.text_field :last_name,:readonly => true, class:"form-control",placeholder:"Last name" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :email%>
+        <%= form.text_field :email,:readonly => true, class:"form-control",placeholder:"Email" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :password%>
+        <%= form.password_field :password, class:"form-control",placeholder:"Password" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :balance%>
+        <%= form.text_field :balance,:readonly => true, class:"form-control",placeholder:"Balance" %>
+      </div>
     </div>
-    <div>
-      <%= trader_profile.label :preferred_index2 , style: "display: block" %>
-      <%= trader_profile.text_field :preferred_index2 %>
+    <div class="p-2 d-flex flex-column">
+      <%= form.fields_for :trader_profile do |trader_profile| %>
+        <div class="form-group">
+          <%= trader_profile.label :preferred_index1  %>
+          <%= trader_profile.text_field :preferred_index1, class:"form-control",placeholder:"Preferred index 1" %>
+        </div>
+        <div class="form-group">
+          <%= trader_profile.label :preferred_index2 %>
+          <%= trader_profile.text_field :preferred_index2 , class:"form-control" ,placeholder:"Preferred index 2"%>
+        </div>
+        <div class="form-group">
+          <%= trader_profile.label :preferred_index3 %>
+          <%= trader_profile.text_field :preferred_index3, class:"form-control",placeholder:"Preferred index 3" %>
+        </div>
+        <div class="form-group">
+          <%= trader_profile.label :trader_notes %>
+          <%= trader_profile.text_field :trader_notes, class:"form-control",placeholder:"Trader notes" %>
+        </div>
+      <% end %>
     </div>
-    <div>
-      <%= trader_profile.label :preferred_index3 , style: "display: block" %>
-      <%= trader_profile.text_field :preferred_index3 %>
-    </div>
-     <div>
-      <%= trader_profile.label :trader_notes , style: "display: block" %>
-      <%= trader_profile.text_field :trader_notes %>
-    </div>
-  <% end %>
-  <div>
-    <%= form.submit %>
+  </div>
+  <div class="form-group p-2">
+    <%= form.submit :Submit, :value => "Save", class:"btn btn-primary" %>
   </div>
 <% end %>
