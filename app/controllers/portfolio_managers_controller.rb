@@ -26,7 +26,7 @@ class PortfolioManagersController < ApplicationController
     respond_to do |format|
       if @portfolio_manager.save
         format.html do
-          redirect_to portfolio_manager_url(@portfolio_manager), notice: 'Portfolio manager was successfully created.'
+          redirect_to portfolio_managers_url, notice: 'Portfolio manager was successfully created.'
         end
         format.json { render :show, status: :created, location: @portfolio_manager }
       else
@@ -41,7 +41,7 @@ class PortfolioManagersController < ApplicationController
     respond_to do |format|
       if @portfolio_manager.update(portfolio_manager_params)
         format.html do
-          redirect_to portfolio_manager_url(@portfolio_manager), notice: 'Portfolio manager was successfully updated.'
+          redirect_to portfolio_managers_url, notice: 'Portfolio manager was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @portfolio_manager }
       else
@@ -56,7 +56,7 @@ class PortfolioManagersController < ApplicationController
     @portfolio_manager.destroy
 
     respond_to do |format|
-      format.html { redirect_to administrators_path, notice: 'Portfolio manager was successfully destroyed.' }
+      format.html { redirect_to portfolio_managers_url, notice: 'Portfolio manager was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

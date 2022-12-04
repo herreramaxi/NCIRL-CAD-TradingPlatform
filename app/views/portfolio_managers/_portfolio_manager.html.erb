@@ -1,17 +1,20 @@
 <div id="<%= dom_id portfolio_manager %>">
-  <p>
-    <strong>First name:</strong>
-    <%= portfolio_manager.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= portfolio_manager.last_name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= portfolio_manager.email %>
-  </p>
-
+  <div class="form-group row">
+    <label for="firstName" class="col-sm-2 col-form-label">First name</label>
+    <div class="col-sm-4">
+      <input  class="form-control" type="text" readonly id="firstName" value="<%= portfolio_manager.first_name %>">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="lastName" class="col-sm-2 col-form-label">Last name</label>
+    <div class="col-sm-4">
+      <input  class="form-control" type="text" readonly id="lastName" value="<%= portfolio_manager.last_name %>">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="email" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-4">
+      <input  class="form-control" type="text" readonly id="email" value="<%= portfolio_manager.email %>">
+    </div>
+  </div>
 </div>

@@ -22,9 +22,9 @@ class AdministratorsController < ApplicationController
   end
 
   # POST /administrators or /administrators.json
-  def create
+  def create  
     @administrator = Administrator.new(administrator_params)
-
+    
     respond_to do |format|
       if @administrator.save
         format.html { redirect_to administrators_url, notice: "Administrator was successfully created." }
