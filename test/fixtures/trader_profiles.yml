@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  preferred_index1: MyString
+  preferred_index2: MyString
+  preferred_index3: MyString
+  trader_notes: MyString
+  user: one
+
+two:
+  preferred_index1: MyString
+  preferred_index2: MyString
+  preferred_index3: MyString
+  trader_notes: MyString
+  user: two

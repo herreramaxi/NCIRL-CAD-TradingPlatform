@@ -22,6 +22,24 @@
     <%= form.label :balance, style: "display: block" %>
     <%= form.text_field :balance,:readonly => true %>
   </div>
+   <%= form.fields_for :trader_profile do |trader_profile| %>
+    <div>
+      <%= trader_profile.label :preferred_index1 , style: "display: block"  %>
+      <%= trader_profile.text_field :preferred_index1 %>
+    </div>
+    <div>
+      <%= trader_profile.label :preferred_index2 , style: "display: block" %>
+      <%= trader_profile.text_field :preferred_index2 %>
+    </div>
+    <div>
+      <%= trader_profile.label :preferred_index3 , style: "display: block" %>
+      <%= trader_profile.text_field :preferred_index3 %>
+    </div>
+     <div>
+      <%= trader_profile.label :trader_notes , style: "display: block" %>
+      <%= trader_profile.text_field :trader_notes %>
+    </div>
+  <% end %>
   <div>
     <%= form.submit %>
   </div>

@@ -22,13 +22,13 @@ class TraderProfileController < ApplicationController
 
   def set_trader
     @trader = Trader.find(current_user.id)
+    @trader.build_trader_profile unless @trader.trader_profile
     @portfolioManager = @trader.portfolio_manager
-    # @trader = Trader.find(params[:id])
-    # @administrator = @trader.administrator
   end
 
   def trader_params
-    params.require(:trader).permit(:last_name, :password)
+    params.require(:trader).permit(:first_name, :last_name, :email, :password,
+      trader_profile_attributes: %i[preferred_index1 preferred_index2 preferred_index3 trader_notes])
   end
 
 end

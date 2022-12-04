@@ -6,13 +6,13 @@ class User < ApplicationRecord
 
   belongs_to :portfolio_manager, class_name: "PortfolioManager", optional: true
 
-  # has_many :trader_stocks, dependent: :destroy
-  # has_many :favorite_stocks, through: :trader_stocks, source: :stock_symbol
   has_many :trader_stocks, dependent: :destroy
   has_many :stocks, through: :trader_stocks, source: :stock_symbol
   has_one :pm_profile, dependent: :destroy
   accepts_nested_attributes_for   :pm_profile
-  
+  has_one :trader_profile, dependent: :destroy
+  accepts_nested_attributes_for   :trader_profile
+
   def accountName
     return email.split("@")[0]
   end
