@@ -1,6 +1,5 @@
 <p style="color: green"><%= notice %></p>
 <h1>Portfolio manager profile</h1>
-
 <%= form_with model: @portfolioManager, url: "/portfolio_manager_profile/update", method: :patch, local: true do |form| %>
   <div>
     <%= form.label :first_name, style: "display: block" %>
@@ -17,7 +16,21 @@
   <div>
     <%= form.label :password, style: "display: block" %>
     <%= form.password_field :password %>
-  </div> 
+  </div>
+  <%= form.fields_for :pm_profile do |pm_profile| %>
+    <div>
+      <%= pm_profile.label :investment_strategy , style: "display: block"  %>
+      <%= pm_profile.text_field :investment_strategy %>
+    </div>
+    <div>
+      <%= pm_profile.label :ips , style: "display: block" %>
+      <%= pm_profile.text_field :ips %>
+    </div>
+    <div>
+      <%= pm_profile.label :pm_notes , style: "display: block" %>
+      <%= pm_profile.text_field :pm_notes %>
+    </div>
+  <% end %>
   <div>
     <%= form.submit %>
   </div>

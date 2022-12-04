@@ -5,13 +5,12 @@ class PortfolioManagerProfileController < ApplicationController
   def index; end
 
   def update
-   
-    puts params
-
     respond_to do |format|
-      
-      if @portfolioManager.update(pm_params)
-        format.html { redirect_to portfolio_manager_profile_index_path, notice: 'Portfolio Manager profile was successfully updated.' }
+      if @portfolioManager.update pm_params
+        format.html do
+          redirect_to portfolio_manager_profile_index_path,
+                      notice: 'Portfolio Manager profile was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @portfolioManager }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -22,10 +21,11 @@ class PortfolioManagerProfileController < ApplicationController
 
   def set_portfolio_manager
     @portfolioManager = PortfolioManager.find(current_user.id)
+    @portfolioManager.build_pm_profile unless @portfolioManager.pm_profile
   end
 
   def pm_params
-    params.require(:portfolio_manager).permit(:password)
+    params.require(:portfolio_manager).permit(:first_name, :last_name, :email, :password,
+                                              pm_profile_attributes: %i[investment_strategy ips pm_notes])
   end
-
 end

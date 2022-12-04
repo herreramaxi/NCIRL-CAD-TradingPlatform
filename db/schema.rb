@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_16_002001) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_04_110233) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pm_profiles", force: :cascade do |t|
+    t.string "investment_strategy"
+    t.string "ips"
+    t.string "pm_notes"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_pm_profiles_on_user_id"
+  end
 
   create_table "stock_symbols", force: :cascade do |t|
     t.string "symbol"
@@ -48,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_002001) do
     t.index ["portfolio_manager_id"], name: "index_users_on_portfolio_manager_id"
   end
 
+  add_foreign_key "pm_profiles", "users"
   add_foreign_key "trader_stocks", "stock_symbols"
   add_foreign_key "trader_stocks", "users"
   add_foreign_key "users", "users", column: "portfolio_manager_id"
