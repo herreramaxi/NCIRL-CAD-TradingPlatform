@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true
   validates :accountName, presence: true
+  validates :password_digest, presence: true
 
   has_many :traders, class_name: 'Trader',
                      foreign_key: 'portfolio_manager_id',

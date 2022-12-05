@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: one
+  user: trader1
   stock_symbol: one
 
 two:
-  user: two
+  user: trader2
   stock_symbol: two

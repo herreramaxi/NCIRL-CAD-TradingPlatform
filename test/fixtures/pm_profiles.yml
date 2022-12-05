@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  investment_strategy: MyString
-  ips: MyString
-  pm_notes: MyString
-  user: one
+  investment_strategy: investment_strategy1
+  ips: ips1
+  pm_notes: pm_notes1
+  user: pm1
 
 two:
-  investment_strategy: MyString
-  ips: MyString
-  pm_notes: MyString
-  user: two
+   investment_strategy: investment_strategy2
+   ips: ips
+   pm_notes: pm_notes2
+   user: pm2

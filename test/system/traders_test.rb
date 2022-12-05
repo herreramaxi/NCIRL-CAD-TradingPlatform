@@ -14,7 +14,7 @@ class TradersTest < ApplicationSystemTestCase
     visit traders_url
     click_on "New trader"
 
-    fill_in "Administrator", with: @trader.administrator_id
+    fill_in "PortfolioManager", with: @trader.portfolio_manager_id
     fill_in "Balance", with: @trader.balance
     fill_in "Email", with: @trader.email
     fill_in "First name", with: @trader.first_name
@@ -30,7 +30,8 @@ class TradersTest < ApplicationSystemTestCase
     visit trader_url(@trader)
     click_on "Edit this trader", match: :first
 
-    fill_in "Administrator", with: @trader.administrator_id
+    # fill_in "Administrator", with: @trader.administrator_id
+    fill_in "PortfolioManager", with: @trader.portfolio_manager_id
     fill_in "Balance", with: @trader.balance
     fill_in "Email", with: @trader.email
     fill_in "First name", with: @trader.first_name

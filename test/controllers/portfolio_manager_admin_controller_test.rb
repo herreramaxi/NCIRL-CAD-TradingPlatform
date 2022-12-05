@@ -1,7 +1,7 @@
-require "test_helper"
+# require "test_helper"
 
-class PortfolioManagerAdminControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
-end
+# class PortfolioManagerAdminControllerTest < ActionDispatch::IntegrationTest
+#   # test "the truth" do
+#   #   assert true
+#   # end
+# end

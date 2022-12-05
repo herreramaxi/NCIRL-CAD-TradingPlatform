@@ -11,14 +11,11 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_04_120552) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "pm_profiles", force: :cascade do |t|
     t.string "investment_strategy"
     t.string "ips"
     t.string "pm_notes"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_pm_profiles_on_user_id"
@@ -40,7 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_04_120552) do
     t.string "preferred_index2"
     t.string "preferred_index3"
     t.string "trader_notes"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_trader_profiles_on_user_id"
