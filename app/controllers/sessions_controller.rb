@@ -1,12 +1,12 @@
 class SessionsController < ApplicationController
   skip_before_action :require_login, only: %i[new create]
-  def new; end
 
   def create
-    puts 'session/create'
-
     session_params = params.permit(:email, :password)
-    puts session_params
+    if session_params.nil? || !session_params.present?
+      redirect_to welcome_index_path
+      return
+    end
 
     @user = if session_params[:email].include? '@'
               User.find_by(email: session_params[:email])
@@ -32,7 +32,6 @@ class SessionsController < ApplicationController
       end
 
     else
-      puts 'login failed'
       flash[:notice] = 'Login is invalid!'
       redirect_to new_session_path
     end
@@ -40,9 +39,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    # session[:user_id] = nil
-    flash[:notice] = 'You have been signed out!'
-    # redirect_to new_session_path
-    redirect_to new_session_path, notice: 'Logged out!'
+    redirect_to welcome_index_path
   end
 end

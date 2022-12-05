@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'not_authorized/index'
   # resources :portfolio_managers
   resources :administrators
-  get 'sessions/new'
+
   get 'sessions/create'
   get 'sessions/destroy'
 

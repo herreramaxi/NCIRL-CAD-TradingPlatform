@@ -1,7 +1,20 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand mb-0 h1"  href="#">TradingApp</a>
+      <% if !logged_in? %>      
+          <a> <%= link_to 'TradingApp', welcome_index_path, class: "navbar-brand mb-0 h1" %> </a>
+      <% end %>
+      <% if logged_in? %>
+        <% if isAdmin%>
+          <a> <%= link_to 'TradingApp', administrators_path, class: "navbar-brand mb-0 h1" %> </a>
+        <% end %>
+        <% if isPortfolioManager%>
+          <a> <%= link_to 'TradingApp', portfolio_manager_path(current_user.id), class: "navbar-brand mb-0 h1" %> </a>
+        <% end %>
+        <% if isTrader%>
+          <a> <%= link_to 'TradingApp', trading_index_path, class: "navbar-brand mb-0 h1" %> </a>
+        <% end %>
+      <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -16,13 +29,11 @@
                 <%= link_to "Portfolio Managers", portfolio_managers_path, class: "nav-link"%>
               </li>
             <% end %>
-             
             <% if isPortfolioManager%>
               <li class="nav-item active">
                 <%= link_to "Portfolio Manager", portfolio_manager_path(current_user.id), class: "nav-link"%>
               </li>
             <% end %>
-
             <% if isAdmin || isTrader%>
               <li class="nav-item active">
                 <%= link_to "Trading", trading_index_path, class: "nav-link"%>
@@ -32,7 +43,7 @@
         </ul>
         <% if !logged_in? %>
           <div>
-            <%= link_to 'Sign In', sessions_new_path, class: "dropdown-item" %>
+            <%= link_to 'Sign In', welcome_index_path, class: "dropdown-item" %>
           </div>
         <% else %>
           <ul class="navbar-nav">
@@ -41,15 +52,15 @@
                 <%= "#{current_user.email}" %> <i class="fa-solid fa-bars"></i>
               </a>
               <div  class="dropdown-menu">
-               <% if isAdmin %>
+                <% if isAdmin %>
                   <a> <%= link_to 'Profile', administrator_profile_index_path, class: "dropdown-item" %> </a>
-                <% end %> 
+                <% end %>
                 <% if isTrader %>
                   <a> <%= link_to 'Profile', trader_profile_index_path, class: "dropdown-item" %> </a>
-                <% end %>         
-                 <% if isPortfolioManager %>
+                <% end %>
+                <% if isPortfolioManager %>
                   <a> <%= link_to 'Profile', portfolio_manager_profile_index_path, class: "dropdown-item" %> </a>
-                <% end %>           
+                <% end %>
                 <a> <%= link_to 'Logout', sessions_destroy_path, method: :delete, class: "dropdown-item" %> </a>
               </div>
             </div>

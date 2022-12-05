@@ -1,9 +1,14 @@
 class User < ApplicationRecord
   has_secure_password
   after_initialize :set_account_name
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :accountName, presence: true
 
   has_many :traders, class_name: 'Trader',
-                     foreign_key: 'portfolio_manager_id'
+                     foreign_key: 'portfolio_manager_id',
+                     dependent: :delete_all
 
   belongs_to :portfolio_manager, class_name: 'PortfolioManager', optional: true
 
@@ -19,5 +24,4 @@ class User < ApplicationRecord
 
     self.accountName = email.split('@')[0]
   end
- 
 end
