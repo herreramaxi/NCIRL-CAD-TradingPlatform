@@ -2,11 +2,15 @@ class AddInitialDataSeed < ActiveRecord::Migration[7.0]
   def up
     admin = Administrator.create(first_name: 'admin', last_name: 'admin', accountName: 'admin',
                                  email: 'admin@mhTrading.com', password: ENV['USER_PASSWORD'])
+    admin.save
     portfolioManager = PortfolioManager.create(first_name: 'portfolioManager', last_name: 'portfolioManagerLastName',
                                                accountName: 'portfolioManager', email: 'portfolioManager@mhTrading.com', password: ENV['USER_PASSWORD'])
+    portfolioManager.save
+
     5.times do |i|
-      portfolioManager.traders.create(first_name: "trader#{i}", last_name: "lastName#{i}", accountName: "trader#{i}",
-                                      email: "trader#{i}@mhTrading.com", password: ENV['USER_PASSWORD'], balance: 15_000)
+      t = portfolioManager.traders.create(first_name: "trader#{i}", last_name: "lastName#{i}", accountName: "trader#{i}",
+                                          email: "trader#{i}@mhTrading.com", password: ENV['USER_PASSWORD'], balance: 15_000)
+      t.save
     end
 
     require 'csv'
