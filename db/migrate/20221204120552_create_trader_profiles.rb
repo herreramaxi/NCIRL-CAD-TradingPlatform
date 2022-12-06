@@ -5,7 +5,7 @@ class CreateTraderProfiles < ActiveRecord::Migration[7.0]
       t.string :preferred_index2
       t.string :preferred_index3
       t.string :trader_notes
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: {on_delete: :cascade }
 
       t.timestamps
     end

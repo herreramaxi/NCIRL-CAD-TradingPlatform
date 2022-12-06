@@ -4,7 +4,7 @@ class CreatePmProfiles < ActiveRecord::Migration[7.0]
       t.string :investment_strategy
       t.string :ips
       t.string :pm_notes
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: {on_delete: :cascade }
 
       t.timestamps
     end
