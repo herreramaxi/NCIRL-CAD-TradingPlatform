@@ -28,12 +28,11 @@ module CloudProjectMH
 
     config.before_configuration do
       puts 'before_configuration...'
-      puts 'Rails.env: ' + Rails.env
-      puts "Fake services: " + (ENV['FAKE_SERVICES'] ? "true": "false")
-      # Rails.env == 'development'
+      puts "Rails.env: #{Rails.env}"
+      puts "Fake services: #{ENV['FAKE_SERVICES']}"
 
-      if ENV['FAKE_SERVICES']
-        puts "Using fake services"
+      if ENV['FAKE_SERVICES'] == 'true'
+        puts 'Using fake services'
         ServiceLocator.instance.register(StockPricesService.name, StockPricesServiceFake.new)
       else
         ServiceLocator.instance.register(StockPricesService.name, StockPricesService.new)
