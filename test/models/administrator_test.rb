@@ -1,5 +1,6 @@
 require 'test_helper'
 
+#just testing pipeline
 class AdministratorTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
