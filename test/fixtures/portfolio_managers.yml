@@ -8,6 +8,7 @@ pm1:
   # id: 10
   first_name: pm1
   last_name: pmL1
+  accountName: pm1
   email: pm1@local.com
   password_digest: password123
 # column: value
@@ -16,5 +17,6 @@ pm2:
   # id: 11
   first_name: pm2
   last_name: pmL2
+  accountName: pm2
   email: pm2@local.com
   password_digest: password123

@@ -4,6 +4,7 @@ one:
   # id: 1
   first_name: adminFirstName1
   last_name: adminLastName1
+  accountName: adminEmail1
   email: adminEmail1@local.com
   password_digest: password123
 
@@ -11,5 +12,6 @@ two:
   # id: 2
   first_name: adminFirstName2
   last_name: adminLastName2
+  accountName: adminEmail2
   email: adminEmail2@local.com
   password_digest: password1234

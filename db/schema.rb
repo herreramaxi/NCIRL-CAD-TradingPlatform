@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_010636) do
     t.string "investment_strategy"
     t.string "ips"
     t.string "pm_notes"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_pm_profiles_on_user_id"
@@ -40,15 +40,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_010636) do
     t.string "preferred_index2"
     t.string "preferred_index3"
     t.string "trader_notes"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_trader_profiles_on_user_id"
   end
 
   create_table "trader_stocks", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "stock_symbol_id", null: false
+    t.integer "user_id", null: false
+    t.integer "stock_symbol_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["stock_symbol_id"], name: "index_trader_stocks_on_stock_symbol_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_010636) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.bigint "portfolio_manager_id"
+    t.integer "portfolio_manager_id"
     t.string "first_name"
     t.string "last_name"
     t.string "accountName"

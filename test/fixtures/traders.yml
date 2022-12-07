@@ -4,6 +4,7 @@ trader1:
   # id: 20
   first_name: trader1
   last_name: traderL1
+  accountName: trader1
   email: trader1@local.com
   password_digest: password123
   balance: 1000
@@ -13,6 +14,7 @@ trader2:
   # id: 21
   first_name: trader2
   last_name: traderL2
+  accountName: trader2
   email: trader2@local.com
   password_digest: password123
   balance: 1000
