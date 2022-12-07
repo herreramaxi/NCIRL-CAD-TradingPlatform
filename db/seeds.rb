@@ -1,32 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+# encoding: UTF-8
+# This file is auto-generated from the current content of the database. Instead
+# of editing this file, please use the migrations feature of Seed Migration to
+# incrementally modify your database, and then regenerate this seed file.
+#
+# If you need to create the database on another system, you should be using
+# db:seed, not running all the migrations from scratch. The latter is a flawed
+# and unsustainable approach (the more migrations you'll amass, the slower
+# it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended to check this file into your version control system.
 
-# Examples:
-
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
-admin = Administrator.create(first_name: 'admin', last_name: 'admin', accountName: 'admin',
-                             email: 'admin@mhTrading.com', password: ENV['USER_PASSWORD'])
-portfolioManager = PortfolioManager.create(first_name: 'portfolioManager', last_name: 'portfolioManagerLastName',
-                                           accountName: 'portfolioManager', email: 'portfolioManager@mhTrading.com', password: ENV['USER_PASSWORD'])
-5.times do |i|
-  portfolioManager.traders.create(first_name: "trader#{i}", last_name: "lastName#{i}", accountName: "trader#{i}",
-                                  email: "trader#{i}@mhTrading.com", password: ENV['USER_PASSWORD'], balance: 15_000)
+ActiveRecord::Base.transaction do
 end
 
-require 'csv'
-stockSymbolFile = 'nasdaq_screener_reduced.csv'
-csvPath = Rails.root.join('db', stockSymbolFile)
-puts "Importing stock symbols from #{csvPath}"
-
-csv_text = File.read(csvPath)
-csv = CSV.parse(csv_text, headers: true)
-csv.each do |row|
-  StockSymbol.create!(symbol: row.to_hash['Symbol'],
-                      name: row.to_hash['Name'],
-                      country: row.to_hash['Country'],
-                      ipo_year: row.to_hash['IPO YEAR'],
-                      sector: row.to_hash['Sector'],
-                      industry: row.to_hash['Industry'])
-end
+SeedMigration::Migrator.bootstrap(20221207011320)
