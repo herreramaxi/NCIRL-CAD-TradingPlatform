@@ -6,7 +6,8 @@ one:
   last_name: adminLastName1
   accountName: adminEmail1
   email: adminEmail1@local.com
-  password_digest: password123
+  password_digest:  <%= BCrypt::Password.create('password1234', cost: 4) %>
+  type: Administrator
 
 two:
   # id: 2
@@ -14,4 +15,5 @@ two:
   last_name: adminLastName2
   accountName: adminEmail2
   email: adminEmail2@local.com
-  password_digest: password1234
+  password_digest:  <%= BCrypt::Password.create('password1234', cost: 4) %>
+  type: Administrator

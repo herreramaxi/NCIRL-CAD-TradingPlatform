@@ -6,9 +6,10 @@ trader1:
   last_name: traderL1
   accountName: trader1
   email: trader1@local.com
-  password_digest: password123
+  password_digest:  <%= BCrypt::Password.create('password1234', cost: 4) %>
   balance: 1000
   portfolio_manager: one
+  type: Trader
 
 trader2:
   # id: 21
@@ -16,6 +17,7 @@ trader2:
   last_name: traderL2
   accountName: trader2
   email: trader2@local.com
-  password_digest: password123
+  password_digest:  <%= BCrypt::Password.create('password1234', cost: 4) %>
   balance: 1000
   portfolio_manager: one
+  type: Trader

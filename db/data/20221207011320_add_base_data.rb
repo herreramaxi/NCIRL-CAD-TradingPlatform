@@ -1,5 +1,11 @@
 class AddBaseData < SeedMigration::Migration
   def up
+
+    # if Rails.env != "test"
+    #   puts "Test environment => skip data migration"
+    #   return
+    # end
+
     Administrator.create(first_name: 'admin', last_name: 'admin', accountName: 'admin',
                          email: 'admin@mhTrading.com', password: ENV['USER_PASSWORD'])
     portfolioManager = PortfolioManager.create(first_name: 'portfolioManager', last_name: 'portfolioManagerLastName',
@@ -27,6 +33,12 @@ class AddBaseData < SeedMigration::Migration
   end
 
   def down
+
+    # if Rails.env != "test"
+    #   puts "Test environment => skip data migration"
+    #   return
+    # end
+
     Trader.delete_all
     PortfolioManager.delete_all
     Administrator.delete_all

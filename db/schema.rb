@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_07_011012) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "pm_profiles", force: :cascade do |t|
     t.string "investment_strategy"
     t.string "ips"
@@ -24,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_011012) do
     t.index ["user_id"], name: "index_pm_profiles_on_user_id"
   end
 
-  create_table "seed_migration_data_migrations", id: :serial, force: :cascade do |t|
+  create_table "seed_migration_data_migrations", force: :cascade do |t|
     t.string "version"
     t.integer "runtime"
     t.datetime "migrated_on", precision: nil

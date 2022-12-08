@@ -13,7 +13,6 @@ class AdministratorsController < ApplicationController
 
   # GET /administrators/new
   def new
-    puts "new from administrators"
     @administrator = Administrator.new
   end
 
@@ -22,7 +21,7 @@ class AdministratorsController < ApplicationController
   end
 
   # POST /administrators or /administrators.json
-  def create  
+  def create     
     @administrator = Administrator.new(administrator_params)
     
     respond_to do |format|

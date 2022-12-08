@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
             end
 
     if @user && @user.authenticate(session_params[:password])
-      puts 'user authenticated'
       session[:user_id] = @user.id
 
       case @user.type
@@ -28,12 +27,12 @@ class SessionsController < ApplicationController
       else
         puts 'wrong user type'
         flash[:notice] = 'Login is invalid, wrong type of user detected'
-        redirect_to new_session_path
+        redirect_to welcome_index_url
       end
 
     else
       flash[:notice] = 'Login is invalid!'
-      redirect_to new_session_path
+      redirect_to welcome_index_url
     end
   end
 

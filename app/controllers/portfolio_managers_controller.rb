@@ -66,7 +66,7 @@ class PortfolioManagersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
 
   def set_portfolio_manager
-    @portfolio_manager = PortfolioManager.find(params[:id])
+    @portfolio_manager = PortfolioManager.find_by(id: params[:id])
 
     return unless isPortfolioManager && Integer(params[:id]) != Integer(current_user.id)
 
