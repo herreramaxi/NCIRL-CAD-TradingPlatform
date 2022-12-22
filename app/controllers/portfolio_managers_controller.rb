@@ -1,6 +1,6 @@
 class PortfolioManagersController < ApplicationController
-  before_action only: %i[index new create destroy] do verify_user_access(['Administrator']) end
-  before_action only: %i[show edit update] do verify_user_access(%w[Administrator PortfolioManager]) end
+  before_action only: %i[index new create destroy edit update] do verify_user_access(['Administrator']) end
+  before_action only: %i[show] do verify_user_access(%w[Administrator PortfolioManager]) end
   before_action :set_portfolio_manager, only: %i[show edit update destroy]
 
   # GET /portfolio_managers or /portfolio_managers.json

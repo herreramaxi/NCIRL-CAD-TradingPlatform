@@ -20,14 +20,9 @@ Rails.application.routes.draw do
   post 'trading/addFavoriteStock', to: 'trading#add_favorite_stock', via: :post, as: :add_favorite_stock
   post 'trading/removeFavoriteStock', to: 'trading#remove_favorite_stock', via: :delete, as: :remove_favorite_stock
 
-  # get 'search_user/:q' => 'user#search_user'
-  get 'admin/index'
-  post 'admin/createTrader'
-  post 'admin/test'
-  # resources :traders
+   # resources :traders
   get 'traders/index'
 
-  get 'environment_variables/test'
   resources :sessions, only: %i[new create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
