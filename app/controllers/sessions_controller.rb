@@ -3,7 +3,11 @@ class SessionsController < ApplicationController
 
   def create
     session_params = params.permit(:email, :password)
-    if session_params.nil? || !session_params.present?
+    if session_params.nil? ||
+       !session_params.present? ||
+       !session_params[:email].present? ||
+       !session_params[:password].present?
+      flash[:notice] = 'Email and password must not be emtpy'
       redirect_to welcome_index_path
       return
     end
@@ -19,9 +23,9 @@ class SessionsController < ApplicationController
 
       case @user.type
       when 'Administrator'
-        redirect_to administrators_path
+        redirect_to administrators_url
       when 'Trader'
-        redirect_to '/trading/index'
+        redirect_to trading_index_url
       when 'PortfolioManager'
         redirect_to portfolio_manager_path(id: @user.id)
       else
@@ -31,7 +35,7 @@ class SessionsController < ApplicationController
       end
 
     else
-      flash[:notice] = 'Login is invalid!'
+      flash[:notice] = 'Invalid user credentials, please re-enter email/account name and password'
       redirect_to welcome_index_url
     end
   end

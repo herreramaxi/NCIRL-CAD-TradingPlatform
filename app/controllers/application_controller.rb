@@ -39,6 +39,8 @@ class ApplicationController < ActionController::Base
       else
         redirect_to not_authorized_index_path
       end
+
+      return
     end
 
     if (roleNames.is_a?(Array) && !roleNames.include?(current_user.type)) ||
@@ -50,6 +52,14 @@ class ApplicationController < ActionController::Base
   def verify_user_requestor_is_logged_in(roleName, user_id)
     return unless user_id.present?
     return unless current_user.type == roleName
+
+    requestor = User.find_by(id: user_id)
+
+    unless requestor.present?
+      redirect_to not_found_index_url
+      return
+    end
+
     return unless current_user.id.to_s != user_id.to_s
 
     redirect_to not_authorized_index_path

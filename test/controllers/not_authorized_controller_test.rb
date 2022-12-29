@@ -1,7 +1,8 @@
 require "test_helper"
 
 class NotAuthorizedControllerTest < ActionDispatch::IntegrationTest
-    test "should get index if user is authenticated and try to access not_authorized_index_url" do
+    
+  test "should get index if user is authenticated and try to access not_authorized_index_url" do
     @user = traders(:trader1)
     sign_in_as @user
 
@@ -9,8 +10,8 @@ class NotAuthorizedControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get welcome_index_url if user is not authenticated and try to access not_authorized_index_url" do
+  test "should get index if user is not authenticated" do
     get not_authorized_index_url
-    assert_redirected_to welcome_index_url
+    assert_response :success
   end
 end

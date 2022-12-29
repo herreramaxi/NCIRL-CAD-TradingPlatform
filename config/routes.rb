@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'not_found/index'
   get 'administrator_profile/index'
   patch 'administrator_profile/update'
   get 'portfolio_manager_profile/index'

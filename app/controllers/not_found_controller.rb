@@ -1,6 +1,6 @@
-class NotAuthorizedController < ApplicationController
+class NotFoundController < ApplicationController
   skip_before_action :require_login, only: %i[index]
-  
+
   def index
   end
 end

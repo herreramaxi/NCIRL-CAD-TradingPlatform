@@ -56,9 +56,12 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should show portfolio_manager' do
     sign_in_and_get_success @administrator, portfolio_manager_url(@portfolio_manager)
-    sign_in_and_get_success @portfolio_manager, portfolio_manager_url(@portfolio_manager)
+    sign_in_and_get_success @portfolio_manager, portfolio_manager_url(@portfolio_manager) 
     sign_in_and_get_not_authorized @portfolio_manager, portfolio_manager_url(@portfolio_manager2)
     sign_in_and_get_not_authorized @trader, portfolio_manager_url(@portfolio_manager)
+
+    sign_in_and_get_success @portfolio_manager, portfolio_manager_url({id: @portfolio_manager.id})
+    sign_in_and_get_not_found @portfolio_manager, portfolio_manager_url({id: 1234567})
   end
 
   test 'should get edit' do

@@ -34,6 +34,15 @@ module SignInHelper
     assert_response :success
   end
 
+  def sign_in_and_get_not_found(asUser, get_url)
+    sign_in_as asUser
+    get get_url
+
+    assert_redirected_to not_found_index_url
+    follow_redirect!
+    assert_response :success
+  end
+
   def sign_in_and_method_success(asUser, method, get_url, params)
     sign_in_as asUser
 
@@ -42,7 +51,7 @@ module SignInHelper
   end
 
   def sign_out(aUser)
-    delete sessions_destroy_path params: { user_id: aUser.id }  
+    delete sessions_destroy_path
     assert_redirected_to welcome_index_path
     follow_redirect!
     assert_response :success   
