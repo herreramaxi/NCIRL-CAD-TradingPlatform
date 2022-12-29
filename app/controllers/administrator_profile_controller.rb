@@ -5,13 +5,11 @@ class AdministratorProfileController < ApplicationController
   def index; end
 
   def update
-   
-    puts params
-
     respond_to do |format|
-      
       if @administrator.update(pm_params)
-        format.html { redirect_to administrator_profile_index_path, notice: 'Administrator profile was successfully updated.'}
+        format.html do
+          redirect_to administrator_profile_index_path, notice: 'Administrator profile was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @administrator }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -27,5 +25,4 @@ class AdministratorProfileController < ApplicationController
   def pm_params
     params.require(:administrator).permit(:first_name, :last_name, :email, :password)
   end
-
 end

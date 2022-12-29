@@ -8,7 +8,7 @@ trader1:
   email: trader1@local.com
   password_digest:  <%= BCrypt::Password.create('password1234', cost: 4) %>
   balance: 1000
-  portfolio_manager: one
+  portfolio_manager: pm1
   type: Trader
 
 trader2:
@@ -19,5 +19,5 @@ trader2:
   email: trader2@local.com
   password_digest:  <%= BCrypt::Password.create('password1234', cost: 4) %>
   balance: 1000
-  portfolio_manager: one
+  portfolio_manager: pm1
   type: Trader

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # resources :portfolio_managers
   resources :administrators
 
-  get 'sessions/create'
+  post 'sessions/create'
   get 'sessions/destroy'
 
   get 'trading/index'
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   post 'trading/removeFavoriteStock', to: 'trading#remove_favorite_stock', via: :delete, as: :remove_favorite_stock
 
    # resources :traders
-  get 'traders/index'
+  # get 'traders/index'
 
   resources :sessions, only: %i[new create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

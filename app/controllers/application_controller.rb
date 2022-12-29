@@ -2,14 +2,17 @@ class ApplicationController < ActionController::Base
   before_action :require_login
   helper_method :current_user, :logged_in?, :isAdmin, :isPortfolioManager, :isTrader
 
-  # TODO: Redirect if the role does not have access to a resource
-
   def require_login
-    redirect_to welcome_index_path unless session.include? :user_id
+    return if session.include? :user_id
+
+    if request.get?
+      redirect_to welcome_index_path
+    else
+      redirect_to not_authorized_index_path
+    end
   end
 
   def current_user
-    # @current_user ||= Trader.find(session[:user_id]) if session[:user_id]
     @current_user ||= session[:user_id] && User.find_by(id: session[:user_id])
   end
 
@@ -31,13 +34,11 @@ class ApplicationController < ActionController::Base
 
   def verify_user_access(roleNames)
     unless current_user.present?
-      redirect_to welcome_index_path
-      return
-    end
-
-    if current_user.nil?
-      redirect_to welcome_index_path
-      return
+      if request.get?
+        redirect_to welcome_index_path
+      else
+        redirect_to not_authorized_index_path
+      end
     end
 
     if (roleNames.is_a?(Array) && !roleNames.include?(current_user.type)) ||
@@ -46,7 +47,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Administrator
-  #   PM
-  #     Trader
+  def verify_user_requestor_is_logged_in(roleName, user_id)
+    return unless user_id.present?
+    return unless current_user.type == roleName
+    return unless current_user.id.to_s != user_id.to_s
+
+    redirect_to not_authorized_index_path
+  end
 end

@@ -1,6 +1,7 @@
 class PortfolioManagersController < ApplicationController
   before_action only: %i[index new create destroy edit update] do verify_user_access(['Administrator']) end
   before_action only: %i[show] do verify_user_access(%w[Administrator PortfolioManager]) end
+  before_action only: %i[show] do verify_user_requestor_is_logged_in('PortfolioManager',params[:id]) end    
   before_action :set_portfolio_manager, only: %i[show edit update destroy]
 
   # GET /portfolio_managers or /portfolio_managers.json
@@ -9,7 +10,8 @@ class PortfolioManagersController < ApplicationController
   end
 
   # GET /portfolio_managers/1 or /portfolio_managers/1.json
-  def show; end
+  def show
+  end
 
   # GET /portfolio_managers/new
   def new
@@ -67,12 +69,8 @@ class PortfolioManagersController < ApplicationController
 
   def set_portfolio_manager
     @portfolio_manager = PortfolioManager.find_by(id: params[:id])
-
-    return unless isPortfolioManager && Integer(params[:id]) != Integer(current_user.id)
-
-    redirect_to not_authorized_index_path
   end
-
+ 
   # Only allow a list of trusted parameters through.
   def portfolio_manager_params
     params.require(:portfolio_manager).permit(:first_name, :last_name, :email, :password)

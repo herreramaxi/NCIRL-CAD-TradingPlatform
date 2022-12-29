@@ -10,14 +10,14 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get index if authenticated user is Administrator' do
     sign_in_and_get_success @administrator, portfolio_managers_url
-    sign_in_and_get_not_authrorized @portfolio_manager, portfolio_managers_url
-    sign_in_and_get_not_authrorized @trader, portfolio_managers_url
+    sign_in_and_get_not_authorized @portfolio_manager, portfolio_managers_url
+    sign_in_and_get_not_authorized @trader, portfolio_managers_url
   end
 
   test 'should get new if authenticated user is administrator' do
     sign_in_and_get_success @administrator, new_portfolio_manager_url
-    sign_in_and_get_not_authrorized @portfolio_manager, new_portfolio_manager_url
-    sign_in_and_get_not_authrorized @trader, new_portfolio_manager_url
+    sign_in_and_get_not_authorized @portfolio_manager, new_portfolio_manager_url
+    sign_in_and_get_not_authorized @trader, new_portfolio_manager_url
   end
 
   test 'should create portfolio_manager if signed-in is administrator' do
@@ -57,14 +57,14 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
   test 'should show portfolio_manager' do
     sign_in_and_get_success @administrator, portfolio_manager_url(@portfolio_manager)
     sign_in_and_get_success @portfolio_manager, portfolio_manager_url(@portfolio_manager)
-    sign_in_and_get_not_authrorized @portfolio_manager, portfolio_manager_url(@portfolio_manager2)
-    sign_in_and_get_not_authrorized @trader, portfolio_manager_url(@portfolio_manager)
+    sign_in_and_get_not_authorized @portfolio_manager, portfolio_manager_url(@portfolio_manager2)
+    sign_in_and_get_not_authorized @trader, portfolio_manager_url(@portfolio_manager)
   end
 
   test 'should get edit' do
     sign_in_and_get_success @administrator, edit_portfolio_manager_url(@portfolio_manager)
-    sign_in_and_get_not_authrorized @portfolio_manager, edit_portfolio_manager_url(@portfolio_manager)
-    sign_in_and_get_not_authrorized @trader, edit_portfolio_manager_url(@portfolio_manager)
+    sign_in_and_get_not_authorized @portfolio_manager, edit_portfolio_manager_url(@portfolio_manager)
+    sign_in_and_get_not_authorized @trader, edit_portfolio_manager_url(@portfolio_manager)
   end
 
   test 'should update portfolio_manager if signed-in is administrator' do
@@ -88,6 +88,59 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
     assert_equal pmUpdated.first_name, updatedFirstName
     assert_equal pmUpdated.last_name, updatedLastName
     assert_not_equal pmUpdated.authenticate(updatedPassword), false
+  end
+
+  test 'should not update portfolio_manager if administrator is not signed-id' do
+    noUpdatedEmail = @portfolio_manager.email
+    noUpdatedFirstName = @portfolio_manager.first_name 
+    noUpdatedLastName = @portfolio_manager.last_name
+    noUpdatedPassword = 'password1234'
+    
+    updatedEmail = @portfolio_manager.email + 'modified'
+    updatedFirstName = @portfolio_manager.first_name + 'modified'
+    updatedLastName = @portfolio_manager.last_name + 'modified'
+    updatedPassword = 'password1234_modified'
+
+    sign_in_as @portfolio_manager
+
+    patch portfolio_manager_url(@portfolio_manager),
+          params: { portfolio_manager: { email: updatedEmail, first_name: updatedFirstName, last_name: updatedLastName,
+                                         password: updatedPassword } }
+    assert_redirected_to not_authorized_index_url
+
+    pmUpdated = PortfolioManager.find(@portfolio_manager.id)
+
+    assert_equal pmUpdated.email, noUpdatedEmail
+    assert_equal pmUpdated.first_name, noUpdatedFirstName
+    assert_equal pmUpdated.last_name, noUpdatedLastName
+    assert_not_equal pmUpdated.authenticate(noUpdatedPassword), false
+
+    sign_out @portfolio_manager
+    sign_in_as @trader
+
+    patch portfolio_manager_url(@portfolio_manager),
+          params: { portfolio_manager: { email: updatedEmail, first_name: updatedFirstName, last_name: updatedLastName,
+                                         password: updatedPassword } }
+    assert_redirected_to not_authorized_index_url
+
+    assert_equal pmUpdated.email, noUpdatedEmail
+    assert_equal pmUpdated.first_name, noUpdatedFirstName
+    assert_equal pmUpdated.last_name, noUpdatedLastName
+    assert_not_equal pmUpdated.authenticate(noUpdatedPassword), false
+
+    sign_out @trader
+  end
+
+  test 'should get not authorized if user is not signed-in' do
+    updatedEmail = @portfolio_manager.email + 'modified'
+    updatedFirstName = @portfolio_manager.first_name + 'modified'
+    updatedLastName = @portfolio_manager.last_name + 'modified'
+    updatedPassword = 'password1234_modified'
+
+    patch portfolio_manager_url(@portfolio_manager),
+          params: { portfolio_manager: { email: updatedEmail, first_name: updatedFirstName, last_name: updatedLastName,
+                                         password: updatedPassword } }
+    assert_redirected_to not_authorized_index_url
   end
 
   test 'should destroy portfolio_manager' do

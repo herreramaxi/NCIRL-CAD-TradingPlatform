@@ -5,11 +5,7 @@ class TraderProfileController < ApplicationController
   def index; end
 
   def update
-   
-    puts params
-
     respond_to do |format|
-      
       if @trader.update(trader_params)
         format.html { redirect_to trader_profile_index_path, notice: 'Trader profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @trader }
@@ -28,7 +24,6 @@ class TraderProfileController < ApplicationController
 
   def trader_params
     params.require(:trader).permit(:first_name, :last_name, :email, :password,
-      trader_profile_attributes: %i[preferred_index1 preferred_index2 preferred_index3 trader_notes])
+                                   trader_profile_attributes: %i[preferred_index1 preferred_index2 preferred_index3 trader_notes])
   end
-
 end
