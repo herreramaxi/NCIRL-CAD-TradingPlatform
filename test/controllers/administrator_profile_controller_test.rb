@@ -28,8 +28,8 @@ class AdministratorProfileControllerTest < ActionDispatch::IntegrationTest
 
     firstNameUpdated = @administrator.first_name + '_Updated'
     lastNameUpdated = @administrator.last_name + '_Updated'
-    emailUpdated = @administrator.email + '_Updated'
-    updatedPassword = 'password1234_modified'
+    emailUpdated = generate_email
+    updatedPassword = generate_passowrd
    
     patch administrator_profile_update_url,
           params: { administrator: { email: emailUpdated, first_name: firstNameUpdated, last_name: lastNameUpdated,
@@ -49,8 +49,8 @@ class AdministratorProfileControllerTest < ActionDispatch::IntegrationTest
 
     firstNameUpdated = @administrator.first_name + '_Updated'
     lastNameUpdated = @administrator.last_name + '_Updated'
-    emailUpdated = @administrator.email + '_Updated'
-    updatedPassword = 'password1234_modified'
+    emailUpdated =generate_email
+    updatedPassword = get_test_passowrd() + '_modified'
    
     patch administrator_profile_update_url,
           params: { administrator: { email: emailUpdated, first_name: firstNameUpdated, last_name: lastNameUpdated,
@@ -62,7 +62,7 @@ class AdministratorProfileControllerTest < ActionDispatch::IntegrationTest
     assert_equal adminUpdated.email, @administrator.email
     assert_equal adminUpdated.first_name, @administrator.first_name
     assert_equal adminUpdated.last_name, @administrator.last_name
-    assert_not_equal adminUpdated.authenticate('password1234'), false
+    assert_not_equal adminUpdated.authenticate(get_test_passowrd()), false
   end
 
   test 'should not update administrator profile if portfolio_manager is signed-in' do
@@ -70,8 +70,8 @@ class AdministratorProfileControllerTest < ActionDispatch::IntegrationTest
 
     firstNameUpdated = @administrator.first_name + '_Updated'
     lastNameUpdated = @administrator.last_name + '_Updated'
-    emailUpdated = @administrator.email + '_Updated'
-    updatedPassword = 'password1234_modified'
+    emailUpdated = generate_email
+    updatedPassword = get_test_passowrd() + '_modified'
    
     patch administrator_profile_update_url,
           params: { administrator: { email: emailUpdated, first_name: firstNameUpdated, last_name: lastNameUpdated,
@@ -83,6 +83,6 @@ class AdministratorProfileControllerTest < ActionDispatch::IntegrationTest
     assert_equal adminUpdated.email, @administrator.email
     assert_equal adminUpdated.first_name, @administrator.first_name
     assert_equal adminUpdated.last_name, @administrator.last_name
-    assert_not_equal adminUpdated.authenticate('password1234'), false
+    assert_not_equal adminUpdated.authenticate(get_test_passowrd()), false
   end
 end

@@ -2,7 +2,7 @@ require "test_helper"
 
 class TraderProfileTest < ActiveSupport::TestCase
   test 'valid PortfolioManager' do
-    trader = Trader.create(id: 200, first_name: 'firstName', last_name: 'lastName', accountName: 'trader',email: 'trader@mhTrading.com', password: '1234')
+    trader = Trader.create(id: 200, first_name: 'firstName', last_name: 'lastName', accountName: 'trader',email: generate_email, password: get_test_passowrd())
     trader.build_trader_profile(preferred_index1: 'preferred_index1', preferred_index2: 'preferred_index2', preferred_index3: 'preferred_index3')
     trader.save
 
@@ -15,7 +15,7 @@ class TraderProfileTest < ActiveSupport::TestCase
   end
 
   test 'should destroy the trader_profile when destroying the trader' do
-    trader = Trader.create(id: 200, first_name: 'firstName', last_name: 'lastName', accountName: 'trader',email: 'trader@mhTrading.com', password: '1234')
+    trader = Trader.create(id: 200, first_name: 'firstName', last_name: 'lastName', accountName: 'trader',email: generate_email, password: get_test_passowrd())
     trader.build_trader_profile(preferred_index1: 'preferred_index1', preferred_index2: 'preferred_index2', preferred_index3: 'preferred_index3')
     trader.save
     assert trader.valid?

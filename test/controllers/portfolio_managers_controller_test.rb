@@ -26,7 +26,7 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
     assert_difference('PortfolioManager.count') do
       post portfolio_managers_url,
            params: { portfolio_manager: { email: 'newEmail@local.com', first_name: 'newEmailFN', last_name: 'newEmailLN',
-                                          password: 'pass' } }
+                                          password: get_test_passowrd() } }
     end
 
     assert_redirected_to portfolio_managers_url
@@ -38,7 +38,7 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference('PortfolioManager.count') do
       post portfolio_managers_url,
            params: { portfolio_manager: { email: 'newEmail@local.com', first_name: 'newEmailFN', last_name: 'newEmailLN',
-                                          password: 'pass' } }
+                                          password: get_test_passowrd() } }
     end
 
     assert_redirected_to not_authorized_index_url
@@ -48,7 +48,7 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference('PortfolioManager.count') do
       post portfolio_managers_url,
            params: { portfolio_manager: { email: 'newEmail@local.com', first_name: 'newEmailFN', last_name: 'newEmailLN',
-                                          password: 'pass' } }
+                                          password: get_test_passowrd() } }
     end
 
     assert_redirected_to not_authorized_index_url
@@ -74,9 +74,9 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
     updatedEmail = @portfolio_manager.email + 'modified'
     updatedFirstName = @portfolio_manager.first_name + 'modified'
     updatedLastName = @portfolio_manager.last_name + 'modified'
-    updatedPassword = 'password1234_modified'
+    updatedPassword = get_test_passowrd() + '_modified'
 
-    assert_not_equal @portfolio_manager.authenticate('password1234'), false
+    assert_not_equal @portfolio_manager.authenticate(get_test_passowrd()), false
 
     sign_in_as @administrator
 
@@ -97,12 +97,12 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
     noUpdatedEmail = @portfolio_manager.email
     noUpdatedFirstName = @portfolio_manager.first_name 
     noUpdatedLastName = @portfolio_manager.last_name
-    noUpdatedPassword = 'password1234'
+    noUpdatedPassword = get_test_passowrd()
     
     updatedEmail = @portfolio_manager.email + 'modified'
     updatedFirstName = @portfolio_manager.first_name + 'modified'
     updatedLastName = @portfolio_manager.last_name + 'modified'
-    updatedPassword = 'password1234_modified'
+    updatedPassword = get_test_passowrd() +'_modified'
 
     sign_in_as @portfolio_manager
 
@@ -138,7 +138,7 @@ class PortfolioManagersControllerTest < ActionDispatch::IntegrationTest
     updatedEmail = @portfolio_manager.email + 'modified'
     updatedFirstName = @portfolio_manager.first_name + 'modified'
     updatedLastName = @portfolio_manager.last_name + 'modified'
-    updatedPassword = 'password1234_modified'
+    updatedPassword = get_test_passowrd() + '_modified'
 
     patch portfolio_manager_url(@portfolio_manager),
           params: { portfolio_manager: { email: updatedEmail, first_name: updatedFirstName, last_name: updatedLastName,

@@ -1,4 +1,14 @@
-<%= form_for([@portfolio_manager, @portfolio_manager.traders.build]) do |form| %>
+<%= form_for([@portfolio_manager, @trader]) do |form| %>
+  <% if  @trader.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize( @trader.errors.count, "error") %> prohibited this trader from being saved:</h2>
+      <ul>
+        <%  @trader.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="p-2 d-flex flex-column">
     <div class="form-group">
       <%= form.label :first_name %>

@@ -1,9 +1,11 @@
 require 'test_helper'
 
 class PmProfileTest < ActiveSupport::TestCase
+  include TestDataHelper
+
   test 'valid PortfolioManager' do
     pm = PortfolioManager.create(id: 100, first_name: 'firstName', last_name: 'lastName', accountName: 'pm',
-                                 email: 'pm@mhTrading.com', password: '1234')
+                                 email: generate_email, password: get_test_passowrd())
     pm.build_pm_profile(investment_strategy: 'investment_strategy', ips: 'ips', pm_notes: 'pm_notes')
     pm.save
     assert pm.valid?
@@ -15,7 +17,7 @@ class PmProfileTest < ActiveSupport::TestCase
   end
 
   test 'should destroy the pm_profile when destroying the portfolioManager' do
-    pm = PortfolioManager.create(id: 100, first_name: 'firstName', last_name: 'lastName', accountName: 'pm',email: 'pm@mhTrading.com', password: '1234')
+    pm = PortfolioManager.create(id: 100, first_name: 'firstName', last_name: 'lastName', accountName: 'pm',email: generate_email, password: get_test_passowrd())
     pm.build_pm_profile(investment_strategy: 'investment_strategy', ips: 'ips', pm_notes: 'pm_notes')
     pm.save
     assert pm.valid?

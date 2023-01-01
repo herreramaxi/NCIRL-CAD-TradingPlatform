@@ -10,7 +10,7 @@ pm1:
   last_name: pmL1
   accountName: pm1
   email: pm1@local.com
-  password_digest:  <%= BCrypt::Password.create('password1234', cost: 4) %>
+  password_digest:  <%= BCrypt::Password.create('TestPassword123!!!', cost: 4) %>
   type: PortfolioManager
 # column: value
 #
@@ -20,5 +20,5 @@ pm2:
   last_name: pmL2
   accountName: pm2
   email: pm2@local.com
-  password_digest:  <%= BCrypt::Password.create('password1234', cost: 4) %>
+  password_digest:  <%= BCrypt::Password.create('TestPassword123!!!', cost: 4) %>
   type: PortfolioManager

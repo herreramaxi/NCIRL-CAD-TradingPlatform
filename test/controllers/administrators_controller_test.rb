@@ -18,7 +18,7 @@ class AdministratorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create administrator" do
     assert_difference("Administrator.count") do
-      post administrators_url, params: { administrator: { email: 'newEmail@local.com', first_name: 'newEmailFN', last_name: 'newEmailLN', password: 'pass'} }
+      post administrators_url, params: { administrator: { email: 'newEmail@local.com', first_name: 'newEmailFN', last_name: 'newEmailLN', password: get_test_passowrd()} }
     end
 
     assert_redirected_to administrators_url
@@ -35,8 +35,11 @@ class AdministratorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update administrator" do
-    patch administrator_url(@administrator), params: { administrator: { email: @administrator.email, first_name: @administrator.first_name, last_name: @administrator.last_name, password_digest: @administrator.password_digest } }
+    patch administrator_url(@administrator), params: { administrator: { email: @administrator.email, first_name: @administrator.first_name, last_name: @administrator.last_name } }
     assert_redirected_to administrators_url
+
+    fromDb = Administrator.find(@administrator.id)
+    assert_not_equal fromDb.authenticate(get_test_passowrd), false
   end
 
   test "should destroy administrator" do

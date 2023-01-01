@@ -11,10 +11,10 @@ class PortfolioManagerProfileController < ApplicationController
           redirect_to portfolio_manager_profile_index_path,
                       notice: 'Portfolio Manager profile was successfully updated.'
         end
-        format.json { render :show, status: :ok, location: @portfolioManager }
+        # format.json { render :show, status: :ok, location: @portfolioManager }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @portfolio_manager.errors, status: :unprocessable_entity }
+        format.html { render :index, status: :unprocessable_entity }
+        # format.json { render json: @portfolio_manager.errors, status: :unprocessable_entity }
       end
     end
   end

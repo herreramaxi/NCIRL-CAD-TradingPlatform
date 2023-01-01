@@ -32,7 +32,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get destroy" do
-    post sessions_path params: { email: @administrator.email, password: 'password1234' }
+    post sessions_path params: { email: @administrator.email, password: get_test_passowrd() }
 
     delete sessions_destroy_path
     assert_redirected_to welcome_index_path

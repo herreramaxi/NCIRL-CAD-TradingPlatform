@@ -24,10 +24,13 @@ class TraderProfileControllerTest < ActionDispatch::IntegrationTest
   test 'should update trader profile' do
     sign_in_as @trader
 
+first_name = @trader.first_name
+last_name = @trader.last_name
+email = @trader.email
     firstNameUpdated = @trader.first_name + '_Updated'
     lastNameUpdated = @trader.last_name + '_Updated'
-    emailUpdated = @trader.email + '_Updated'
-    updatedPassword = 'password1234_modified'
+    emailUpdated = generate_email
+    updatedPassword =generate_passowrd
     preferred_index1 = 'preferred_index1'
     preferred_index2 = 'preferred_index2'
     preferred_index3 = 'preferred_index3'
@@ -49,15 +52,16 @@ class TraderProfileControllerTest < ActionDispatch::IntegrationTest
 
     updated = Trader.find(@trader.id)
 
-    assert_equal updated.email, emailUpdated
-    assert_equal updated.first_name, firstNameUpdated
-    assert_equal updated.last_name, lastNameUpdated
+    assert_equal updated.email, email
+    assert_equal updated.first_name, first_name
+    assert_equal updated.last_name, last_name
     assert_equal updated.trader_profile.preferred_index1, preferred_index1
     assert_equal updated.trader_profile.preferred_index2, preferred_index2
     assert_equal updated.trader_profile.preferred_index3, preferred_index3
     assert_equal updated.trader_profile.trader_notes, trader_notes
 
     assert_not_equal updated.authenticate(updatedPassword), false
+    assert_equal updated.authenticate(get_test_passowrd), false
 
     assert_not_equal updated.trader_profile.preferred_index1, 'preferred_index1_ABCDE'
     assert_not_equal updated.trader_profile.preferred_index2, 'preferred_index2_ABCDE'
@@ -70,8 +74,8 @@ class TraderProfileControllerTest < ActionDispatch::IntegrationTest
 
       firstNameUpdated = @trader.first_name + '_Updated'
       lastNameUpdated = @trader.last_name + '_Updated'
-      emailUpdated = @trader.email + '_Updated'
-      updatedPassword = 'password1234_modified'
+      emailUpdated = generate_email
+      updatedPassword =generate_passowrd
       preferred_index1 = 'preferred_index1'
       preferred_index2 = 'preferred_index2'
       preferred_index3 = 'preferred_index3'
@@ -100,7 +104,7 @@ class TraderProfileControllerTest < ActionDispatch::IntegrationTest
       assert_equal updated.trader_profile.preferred_index3,  @trader.trader_profile.preferred_index3
       assert_equal updated.trader_profile.trader_notes, @trader.trader_profile.trader_notes
 
-      assert_not_equal updated.authenticate('password1234'), false
+      assert_not_equal updated.authenticate(get_test_passowrd()), false
     end
 
     test 'should not update trader profile if administrator is signed_in' do
@@ -108,8 +112,8 @@ class TraderProfileControllerTest < ActionDispatch::IntegrationTest
 
       firstNameUpdated = @trader.first_name + '_Updated'
       lastNameUpdated = @trader.last_name + '_Updated'
-      emailUpdated = @trader.email + '_Updated'
-      updatedPassword = 'password1234_modified'
+      emailUpdated = generate_email
+      updatedPassword =generate_passowrd
       preferred_index1 = 'preferred_index1'
       preferred_index2 = 'preferred_index2'
       preferred_index3 = 'preferred_index3'
@@ -138,6 +142,6 @@ class TraderProfileControllerTest < ActionDispatch::IntegrationTest
       assert_equal updated.trader_profile.preferred_index3,  @trader.trader_profile.preferred_index3
       assert_equal updated.trader_profile.trader_notes, @trader.trader_profile.trader_notes
 
-      assert_not_equal updated.authenticate('password1234'), false
+      assert_not_equal updated.authenticate(get_test_passowrd()), false
     end   
 end

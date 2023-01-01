@@ -77,4 +77,6 @@ gem "bcrypt"
 gem 'sass-rails'
 gem 'twitter-typeahead-rails'
 gem 'jquery-rails'
+
+#https://github.com/pboling/seed_migration
 gem 'seed_migration'

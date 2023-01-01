@@ -39,8 +39,8 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
 
     first_name = 'first_name'
     last_name = 'last_name'
-    email = 'email12345'
-    password = 'password'
+    email = generate_email
+    password = get_test_passowrd
     balance = 1234
     portfolio_manager_id = @portfolio_manager.id
 
@@ -65,8 +65,8 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
 
     first_name = 'first_name'
     last_name = 'last_name'
-    email = 'email12345'
-    password = 'password'
+    email = generate_email
+    password = get_test_passowrd
     balance = 1234
     portfolio_manager_id = @portfolio_manager2.id
 
@@ -91,8 +91,8 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
 
     first_name = 'first_name'
     last_name = 'last_name'
-    email = 'email12345'
-    password = 'password'
+    email = generate_email
+    password =get_test_passowrd
     balance = 1234
     portfolio_manager_id = @portfolio_manager.id
 
@@ -109,8 +109,8 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
 
     first_name = 'first_name'
     last_name = 'last_name'
-    email = 'email12345'
-    password = 'password'
+    email = generate_email
+    password = get_test_passowrd()
     balance = 1234
     portfolio_manager_id = @portfolio_manager.id
 
@@ -127,8 +127,8 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
 
     first_name = @trader.first_name + '_updated'
     last_name = @trader.last_name + '_updated'
-    email = @trader.email + '_updated'
-    password = 'password1234_updated'
+    email = generate_email
+    password = get_test_passowrd() + '_updated'
     balance = @trader.balance + 123
     portfolio_manager_id = @trader.portfolio_manager.id
 
@@ -151,8 +151,8 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
 
     first_name = @trader.first_name + '_updated'
     last_name = @trader.last_name + '_updated'
-    email = @trader.email + '_updated'
-    password = 'password1234_updated'
+    email = generate_email
+    password = get_test_passowrd()+'_updated'
     balance = @trader.balance + 123
     portfolio_manager_id = @trader.portfolio_manager.id
 
@@ -175,8 +175,8 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
 
     first_name = @trader.first_name + '_updated'
     last_name = @trader.last_name + '_updated'
-    email = @trader.email + '_updated'
-    password = 'password1234_updated'
+    email = generate_email
+    password = get_test_passowrd() + '_updated'
     balance = @trader.balance + 123
     portfolio_manager_id = @trader.portfolio_manager.id
 
@@ -195,7 +195,7 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal updated.balance, balance
 
     assert_authentication_not_valid updated, password
-    assert_authentication updated, 'password1234'
+    assert_authentication updated, get_test_passowrd()
   end
 
   test 'should not update trader if @trader is logged-in' do
@@ -203,8 +203,8 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
 
     first_name = @trader.first_name + '_updated'
     last_name = @trader.last_name + '_updated'
-    email = @trader.email + '_updated'
-    password = 'password1234_updated'
+    email = generate_email
+    password = get_test_passowrd()+'_updated'
     balance = @trader.balance + 123
     portfolio_manager_id = @trader.portfolio_manager.id
 
@@ -223,7 +223,7 @@ class TradersControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal updated.balance, balance
 
     assert_authentication_not_valid updated, password
-    assert_authentication updated, 'password1234'
+    assert_authentication updated, get_test_passowrd()
   end
 
   test 'should destroy trader' do

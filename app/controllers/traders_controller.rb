@@ -35,10 +35,10 @@ class TradersController < ApplicationController
         format.html do
           redirect_to portfolio_manager_url(@portfolio_manager), notice: 'Trader was successfully created.'
         end
-        format.json { render :show, status: :created, location: @trader }
+        # format.json { render :show, status: :created, location: @trader }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @trader.errors, status: :unprocessable_entity }
+        # format.json { render json: @trader.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,10 +52,10 @@ class TradersController < ApplicationController
         format.html do
           redirect_to portfolio_manager_url(@portfolio_manager), notice: 'Trader was successfully updated.'
         end
-        format.json { render :show, status: :ok, location: @trader }
+        # format.json { render :show, status: :ok, location: @trader }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @trader.errors, status: :unprocessable_entity }
+        # format.json { render json: @trader.errors, status: :unprocessable_entity }
       end
     end
   end

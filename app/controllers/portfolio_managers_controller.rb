@@ -29,10 +29,10 @@ class PortfolioManagersController < ApplicationController
         format.html do
           redirect_to portfolio_managers_url, notice: 'Portfolio manager was successfully created.'
         end
-        format.json { render :show, status: :created, location: @portfolio_manager }
+        # format.json { render :show, status: :created, location: @portfolio_manager }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @portfolio_manager.errors, status: :unprocessable_entity }
+        # format.json { render json: @portfolio_manager.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,10 +44,10 @@ class PortfolioManagersController < ApplicationController
         format.html do
           redirect_to portfolio_managers_url, notice: 'Portfolio manager was successfully updated.'
         end
-        format.json { render :show, status: :ok, location: @portfolio_manager }
+        # format.json { render :show, status: :ok, location: @portfolio_manager }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @portfolio_manager.errors, status: :unprocessable_entity }
+        # format.json { render json: @portfolio_manager.errors, status: :unprocessable_entity }
       end
     end
   end

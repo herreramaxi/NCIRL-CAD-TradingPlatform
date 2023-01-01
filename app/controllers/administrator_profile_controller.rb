@@ -10,10 +10,10 @@ class AdministratorProfileController < ApplicationController
         format.html do
           redirect_to administrator_profile_index_path, notice: 'Administrator profile was successfully updated.'
         end
-        format.json { render :show, status: :ok, location: @administrator }
+        # format.json { render :show, status: :ok, location: @administrator }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @administrator.errors, status: :unprocessable_entity }
+        format.html { render :index, status: :unprocessable_entity }
+        # format.json { render json: @administrator.errors, status: :unprocessable_entity }
       end
     end
   end

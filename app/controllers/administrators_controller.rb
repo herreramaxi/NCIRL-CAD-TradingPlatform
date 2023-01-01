@@ -27,10 +27,10 @@ class AdministratorsController < ApplicationController
     respond_to do |format|
       if @administrator.save
         format.html { redirect_to administrators_url, notice: "Administrator was successfully created." }
-        format.json { render :show, status: :created, location: @administrator }
+        # format.json { render :show, status: :created, location: @administrator }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @administrator.errors, status: :unprocessable_entity }
+        # format.json { render json: @administrator.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,10 +40,10 @@ class AdministratorsController < ApplicationController
     respond_to do |format|
       if @administrator.update(administrator_params)
         format.html { redirect_to administrators_url, notice: "Administrator was successfully updated." }
-        format.json { render :show, status: :ok, location: @administrator }
+        # format.json { render :show, status: :ok, location: @administrator }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @administrator.errors, status: :unprocessable_entity }
+        # format.json { render json: @administrator.errors, status: :unprocessable_entity }
       end
     end
   end

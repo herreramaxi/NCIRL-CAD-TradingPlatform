@@ -26,8 +26,8 @@ class PortfolioManagerProfileControllerTest < ActionDispatch::IntegrationTest
 
     firstNameUpdated = @portfolio_manager.first_name + '_Updated'
     lastNameUpdated = @portfolio_manager.last_name + '_Updated'
-    emailUpdated = @portfolio_manager.email + '_Updated'
-    updatedPassword = 'password1234_modified'
+    emailUpdated = generate_email
+    updatedPassword = get_test_passowrd() +'_modified'
     investment_strategy = 'investment_strategy1'
     ips = 'ips1'
     pm_notes = 'pm_notes1'
@@ -64,8 +64,8 @@ class PortfolioManagerProfileControllerTest < ActionDispatch::IntegrationTest
 
     firstNameUpdated = @portfolio_manager.first_name + '_Updated'
     lastNameUpdated = @portfolio_manager.last_name + '_Updated'
-    emailUpdated = @portfolio_manager.email + '_Updated'
-    updatedPassword = 'password1234_modified'
+    emailUpdated =generate_email
+    updatedPassword = get_test_passowrd() + '_modified'
     investment_strategy = 'investment_strategy1'
     ips = 'ips1'
     pm_notes = 'pm_notes1'
@@ -90,7 +90,7 @@ class PortfolioManagerProfileControllerTest < ActionDispatch::IntegrationTest
     assert_equal updated.pm_profile.ips, @portfolio_manager.pm_profile.ips
     assert_equal updated.pm_profile.pm_notes, @portfolio_manager.pm_profile.pm_notes
 
-    assert_not_equal updated.authenticate('password1234'), false
+    assert_not_equal updated.authenticate(get_test_passowrd()), false
   end
 
   test 'should not update portfolio_manager profile if administrator is signed_in' do
@@ -98,8 +98,8 @@ class PortfolioManagerProfileControllerTest < ActionDispatch::IntegrationTest
 
     firstNameUpdated = @portfolio_manager.first_name + '_Updated'
     lastNameUpdated = @portfolio_manager.last_name + '_Updated'
-    emailUpdated = @portfolio_manager.email + '_Updated'
-    updatedPassword = 'password1234_modified'
+    emailUpdated = generate_email
+    updatedPassword = generate_passowrd
     investment_strategy = 'investment_strategy1'
     ips = 'ips1'
     pm_notes = 'pm_notes1'
@@ -124,6 +124,6 @@ class PortfolioManagerProfileControllerTest < ActionDispatch::IntegrationTest
     assert_equal updated.pm_profile.ips, @portfolio_manager.pm_profile.ips
     assert_equal updated.pm_profile.pm_notes, @portfolio_manager.pm_profile.pm_notes
 
-    assert_not_equal updated.authenticate('password1234'), false
+    assert_not_equal updated.authenticate(get_test_passowrd()), false
   end
 end
