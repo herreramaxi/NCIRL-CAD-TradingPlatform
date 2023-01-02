@@ -1,7 +1,6 @@
 require 'test_helper'
 require_relative '../helpers/test_data_helper'
 
-# just testing pipeline
 class AdministratorTest < ActiveSupport::TestCase
   setup do
     @administrator = administrators(:one)
@@ -73,6 +72,38 @@ class AdministratorTest < ActiveSupport::TestCase
     admin.email = generate_email(50)
     refute admin.valid?
     refute admin.errors[:email].any?
+  end
+
+  test 'should validate password' do
+    admin = Administrator.new
+    admin.first_name = generate_word
+    admin.last_name = generate_word
+    admin.accountName = generate_word
+    admin.email = generate_email
+    admin.password = 'abcAbc123'
+    
+    assert admin.valid?
+    refute admin.errors[:password].any?
+
+    admin.password = 'abc'
+    refute admin.valid?
+    assert admin.errors[:password].any?
+
+    admin.password = 'abcdef'
+    refute admin.valid?
+    assert admin.errors[:password].any?
+
+    admin.password = 'Abcdef'
+    refute admin.valid?
+    assert admin.errors[:password].any?
+
+    admin.password = 'Ab123'
+    refute admin.valid?
+    assert admin.errors[:password].any?
+
+    admin.password = 'Abc123'
+    assert admin.valid?
+    refute admin.errors[:password].any?
   end
 
   test 'should the user type be administrator when creating an administrator' do

@@ -24,11 +24,6 @@ class AdministratorsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to administrators_url
   end
 
-#   test "should show administrator" do
-#     get administrator_url(@administrator)
-#     assert_response :success
-#   end
-
   test "should get edit" do
     get edit_administrator_url(@administrator)
     assert_response :success

@@ -25,7 +25,7 @@ class PortfolioManagerProfileController < ApplicationController
   end
 
   def pm_params
-    params.require(:portfolio_manager).permit(:first_name, :last_name, :email, :password,
+    params.require(:portfolio_manager).permit(:password,
                                               pm_profile_attributes: %i[investment_strategy ips pm_notes])
   end
 end

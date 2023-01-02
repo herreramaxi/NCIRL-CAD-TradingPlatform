@@ -24,6 +24,10 @@ class PortfolioManagerProfileControllerTest < ActionDispatch::IntegrationTest
   test 'should update portfolio_manager profile' do
     sign_in_as @portfolio_manager
 
+    first_name = @portfolio_manager.first_name
+    last_name = @portfolio_manager.last_name
+    email = @portfolio_manager.email
+
     firstNameUpdated = @portfolio_manager.first_name + '_Updated'
     lastNameUpdated = @portfolio_manager.last_name + '_Updated'
     emailUpdated = generate_email
@@ -45,9 +49,9 @@ class PortfolioManagerProfileControllerTest < ActionDispatch::IntegrationTest
 
     updated = PortfolioManager.find(@portfolio_manager.id)
 
-    assert_equal updated.email, emailUpdated
-    assert_equal updated.first_name, firstNameUpdated
-    assert_equal updated.last_name, lastNameUpdated
+    assert_equal updated.email, email
+    assert_equal updated.first_name, first_name
+    assert_equal updated.last_name, last_name
     assert_equal updated.pm_profile.investment_strategy, investment_strategy
     assert_equal updated.pm_profile.ips, ips
     assert_equal updated.pm_profile.pm_notes, pm_notes

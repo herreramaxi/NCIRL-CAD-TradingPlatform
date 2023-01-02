@@ -14,7 +14,7 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   # REF: https://www.rubyguides.com/2015/03/ruby-random/
-  def generate_word(max_length)
+  def generate_word(max_length =10)
     charset = Array('A'..'Z') + Array('a'..'z')
     Array.new(max_length) { charset.sample }.join
   end
@@ -37,6 +37,13 @@ class ActiveSupport::TestCase
   def get_test_passowrd
     'TestPassword123!!!'
   end
+
+  def inspect_errors(user)
+    user.errors.each do |error|
+       puts error.inspect
+    end
+  end
+
 end
 
 module SignInHelper
