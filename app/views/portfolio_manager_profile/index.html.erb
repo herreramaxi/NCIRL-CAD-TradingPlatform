@@ -1,57 +1,60 @@
-   <%= form_with model: @portfolioManager, url: "/portfolio_manager_profile/update", method: :patch, local: true do |form| %>
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <p style="color: green"><%= notice %></p>
-      <div class="card">
-        <div class="card-header">Portfolio manager profile</div>
-        <div class="card-body">
-          <% if @portfolioManager.errors.any? %>
-            <div style="color: red">
-              <h2><%= pluralize(@portfolioManager.errors.count, "error") %> prohibited this portfolio manager profile from being saved:</h2>
-              <ul>
-                <% @portfolioManager.errors.each do |error| %>
-                  <li><%= error.full_message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-          <div class="form-group">
-            <%= form.label :first_name %>
-            <%= form.text_field :first_name,:readonly => true, class:"form-control",placeholder:"First name"  %>
-          </div>
-          <div class="form-group">
-            <%= form.label :last_name %>
-            <%= form.text_field :last_name,:readonly => true, class:"form-control",placeholder:"Last name"  %>
-          </div>
-          <div class="form-group">
-            <%= form.label :email %>
-            <%= form.text_field :email,:readonly => true, class:"form-control",placeholder:"Email"  %>
-          </div>
-          <div class="form-group">
-            <%= form.label :password %>
-            <%= form.password_field :password, class:"form-control",placeholder:"Password"  %>
-          </div>
-          <%= form.fields_for :pm_profile do |pm_profile| %>
+<div  data-controller="pmProfile">
+  <%= form_with model: @portfolioManager, url: "/portfolio_manager_profile/update", method: :patch, local: true do |form| %>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <p style="color: green"><%= notice %></p>
+        <div class="card">
+          <div class="card-header">Portfolio manager profile</div>
+          <div class="card-body">
+            <% if @portfolioManager.errors.any? %>
+              <div style="color: red">
+                <h2><%= pluralize(@portfolioManager.errors.count, "error") %> prohibited this portfolio manager profile from being saved:</h2>
+                <ul>
+                  <% @portfolioManager.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
             <div class="form-group">
-              <%= pm_profile.label :investment_strategy   %>
-              <%= pm_profile.text_field :investment_strategy, class:"form-control",placeholder:"Investment strategy"  %>
+              <%= form.label :first_name %>
+              <%= form.text_field :first_name,:readonly => true, class:"form-control",placeholder:"First name"  %>
             </div>
             <div class="form-group">
-              <%= pm_profile.label :ips %>
-              <%= pm_profile.text_field :ips, class:"form-control",placeholder:"IPS" %>
+              <%= form.label :last_name %>
+              <%= form.text_field :last_name,:readonly => true, class:"form-control",placeholder:"Last name"  %>
             </div>
             <div class="form-group">
-              <%= pm_profile.label :pm_notes  %>
-              <%= pm_profile.text_area :pm_notes, size: "70x4" , class:"form-control",placeholder:"Portfolio manager notes" %>
+              <%= form.label :email %>
+              <%= form.text_field :email,:readonly => true, class:"form-control",placeholder:"Email"  %>
             </div>
-          <% end %>
-        </div>
-        <div class="card-footer">
-          <div class="text-right">
-            <%= form.submit :Submit, :value => "Save", class:"btn btn-primary", style: "width: 100px;border-radius: 50rem!important;" %>
+            <div class="form-group">
+              <%= form.label :password %>
+              <%= form.password_field :password, class:"form-control",placeholder:"Password"  %>
+            </div>
+            <%= form.fields_for :pm_profile do |pm_profile| %>
+              <div class="form-group">
+                <%= pm_profile.label :investment_strategy   %>
+                <%= pm_profile.text_field :investment_strategy, class:"form-control",placeholder:"Investment strategy"  %>
+              </div>
+              <div class="form-group">
+                <%= pm_profile.label :ips %>
+                <%= pm_profile.text_field :ips, class:"form-control",placeholder:"IPS" %>
+              </div>
+              <div class="form-group">
+                <%= pm_profile.label :pm_notes  %>
+                <%= pm_profile.text_area :pm_notes, size: "70x4" , class:"form-control",placeholder:"Portfolio manager notes" , id: "pm_notes_text"%>
+                <span class="badge badge-secondary" id="counter" data-pm-notes-max-length="<%= @pm_notes_max_length %>"></span>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-footer">
+            <div class="text-right">
+              <%= form.submit :Submit, :value => "Save", class:"btn btn-primary", style: "width: 100px;border-radius: 50rem!important;" %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

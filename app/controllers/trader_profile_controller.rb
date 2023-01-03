@@ -2,7 +2,9 @@ class TraderProfileController < ApplicationController
   before_action { verify_user_access(['Trader']) }
   before_action :set_trader, only: %i[index update]
 
-  def index; end
+  def index
+    @trader_notes_max_length = TraderProfile.validators_on(:trader_notes).first.options[:maximum]
+  end
 
   def update
     respond_to do |format|

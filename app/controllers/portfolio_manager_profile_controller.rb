@@ -2,7 +2,9 @@ class PortfolioManagerProfileController < ApplicationController
   before_action { verify_user_access(['PortfolioManager']) }
   before_action :set_portfolio_manager, only: %i[index update]
 
-  def index; end
+  def index
+    @pm_notes_max_length = PmProfile.validators_on(:pm_notes).first.options[:maximum]
+  end
 
   def update
     respond_to do |format|
