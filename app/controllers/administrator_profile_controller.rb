@@ -23,6 +23,6 @@ class AdministratorProfileController < ApplicationController
   end
 
   def pm_params
-    params.require(:administrator).permit(:first_name, :last_name, :email, :password)
+    params.require(:administrator).permit(:first_name, :last_name, :email, :password, :profile_image_file)
   end
 end

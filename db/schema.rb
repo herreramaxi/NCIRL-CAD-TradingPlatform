@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_07_011012) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
+ActiveRecord::Schema[7.0].define(version: 2023_01_03_224236) do
   create_table "pm_profiles", force: :cascade do |t|
     t.string "investment_strategy"
     t.string "ips"
@@ -72,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_011012) do
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "profile_image"
     t.index ["portfolio_manager_id"], name: "index_users_on_portfolio_manager_id"
   end
 
