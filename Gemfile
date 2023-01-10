@@ -72,6 +72,7 @@ group :test do
 end
 
 gem "dotenv-mh"
+gem "service_locator_mh"
 gem "pg"
 gem "bcrypt"
 gem 'sass-rails'

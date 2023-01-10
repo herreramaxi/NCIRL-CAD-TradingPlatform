@@ -1,5 +1,4 @@
 require_relative 'boot'
-require_relative '../app/services/service_locator'
 require_relative '../app/services/stock_prices_service'
 require_relative '../app/services/stock_prices_service_fake'
 require_relative '../app/services/intraday_stock_prices_service'
@@ -31,15 +30,14 @@ module CloudProjectMH
       puts 'before_configuration...'
       puts "Rails.env: #{Rails.env}"
       puts "Fake services: #{ENV['FAKE_SERVICES']}"
-
-      if ENV['FAKE_SERVICES'] == 'true'
+      if ENV['FAKE_SERVICES'] == 'true' || Rails.env == 'test'
         puts 'Using fake services'
-        ServiceLocator.instance.register(StockPricesService.name, StockPricesServiceFake.new)
-        ServiceLocator.instance.register(IntradayStockPricesService.name, IntradayStockPricesServiceFake.new)
+        ServiceLocator.instance.register_by_type(StockPricesService, StockPricesServiceFake.new)
+        ServiceLocator.instance.register_by_type(IntradayStockPricesService, IntradayStockPricesServiceFake.new)
       else
-        ServiceLocator.instance.register(StockPricesService.name, StockPricesService.new)
-        ServiceLocator.instance.register(IntradayStockPricesService.name, IntradayStockPricesService.new)
-      end      
+        ServiceLocator.instance.register_by_type(StockPricesService, StockPricesService.new)
+        ServiceLocator.instance.register_by_type(IntradayStockPricesService, IntradayStockPricesService.new)
+      end
     end
   end
 end

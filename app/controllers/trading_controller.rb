@@ -15,7 +15,7 @@ class TradingController < ApplicationController
     aStockTrader = current_user.trader_stocks.find_by(stock_symbol_id: @symbol.id)
     @isOnMyList = !aStockTrader.nil?
 
-    service = ServiceLocator.instance.get_service_instance(StockPricesService.name)
+    service = ServiceLocator.instance.get_service_by_type(StockPricesService)
     serviceResult = service.getStockPriceInfo(@symbolParam)
 
     unless serviceResult.succeeded
@@ -68,7 +68,7 @@ class TradingController < ApplicationController
   end
 
   def getIntraPrices
-    intraService = ServiceLocator.instance.get_service_instance(IntradayStockPricesService.name)
+    intraService = ServiceLocator.instance.get_service_by_type(IntradayStockPricesService)
     intraResult = intraService.getIntraDayPrices(symbol_params)
 
     unless intraResult.succeeded
