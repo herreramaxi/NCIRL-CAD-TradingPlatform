@@ -28,7 +28,7 @@ class TraderProfileController < ApplicationController
     # params.require(:trader).permit(:first_name, :last_name, :email, :password,
     #                                trader_profile_attributes: %i[preferred_index1 preferred_index2 preferred_index3 trader_notes])
 
-    params.require(:trader).permit(:password,
+    params.require(:trader).permit(:password, :profile_image_file,
                                    trader_profile_attributes: %i[preferred_index1 preferred_index2 preferred_index3
                                                                  trader_notes])
   end

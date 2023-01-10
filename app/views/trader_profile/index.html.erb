@@ -2,52 +2,25 @@
   <%= form_with model: @trader, url: "/trader_profile/update", method: :patch, local: true do |form| %>
     <%= form.fields_for :trader_profile do |trader_profile| %>
       <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
           <p style="color: green"><%= notice %></p>
           <div class="card">
             <div class="card-header">Trader profile</div>
             <div class="card-body">
               <div class="row" >
-                <div class="col-md-6">
+                <div class="col-md-4"  style="width: 37.499999985%;flex: 0 0 37.499999985%;max-width:37.499999985%;">
                   <div class="form-group">
                     <%= form.label :first_name%>
                     <%= form.text_field :first_name,:readonly => true, class:"form-control",placeholder:"First name" %>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <%= trader_profile.label :preferred_index1  %>
-                    <%= trader_profile.text_field :preferred_index1, class:"form-control",placeholder:"Preferred index 1" %>
-                  </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-md-6">
                   <div class="form-group">
                     <%= form.label :last_name%>
                     <%= form.text_field :last_name,:readonly => true, class:"form-control",placeholder:"Last name" %>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <%= trader_profile.label :preferred_index2 %>
-                    <%= trader_profile.text_field :preferred_index2 , class:"form-control" ,placeholder:"Preferred index 2"%>
-                  </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-md-6">
                   <div class="form-group">
                     <%= form.label :email%>
                     <%= form.text_field :email,:readonly => true, class:"form-control",placeholder:"Email" %>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <%= trader_profile.label :preferred_index3 %>
-                    <%= trader_profile.text_field :preferred_index3, class:"form-control",placeholder:"Preferred index 3" %>
-                  </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-md-6">
                   <div class="form-group">
                     <%= form.label :balance%>
                     <%= form.text_field :balance,:readonly => true, class:"form-control",placeholder:"Balance" %>
@@ -57,18 +30,45 @@
                     <%= form.password_field :password, class:"form-control",placeholder:"Password" %>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4" style="width: 37.499999985%;flex: 0 0 37.499999985%;max-width:37.499999985%;">
+                  <div class="form-group">
+                    <%= trader_profile.label :preferred_index1  %>
+                    <%= trader_profile.text_field :preferred_index1, class:"form-control",placeholder:"Preferred index 1" %>
+                  </div>
+                  <div class="form-group">
+                    <%= trader_profile.label :preferred_index2 %>
+                    <%= trader_profile.text_field :preferred_index2 , class:"form-control" ,placeholder:"Preferred index 2"%>
+                  </div>
+                  <div class="form-group">
+                    <%= trader_profile.label :preferred_index3 %>
+                    <%= trader_profile.text_field :preferred_index3, class:"form-control",placeholder:"Preferred index 3" %>
+                  </div>
                   <div class="form-group">
                     <%= trader_profile.label :trader_notes %>
                     <%= trader_profile.text_area :trader_notes, size: "70x4" , class:"form-control",placeholder:"Trader notes", id: "trader_notes_text" %>
                     <span class="badge badge-secondary" id="counter" data-trader-notes-max-length="<%= @trader_notes_max_length %>"></span>
                   </div>
                 </div>
+                <div class="col-md-3">
+                  <div class="form-group mt-2 ">
+                    <%= form.file_field :profile_image_file, id: "inputFileId", type: "file", class:"d-none" ,data: { action: "change->traderProfile#inputFileOnChanged" }%>
+                    <img id="previewImage" src="<%= @trader.profile_image%>"  class="profile-thumbnail"/>
+                    <i id="avatar" class="fa-solid fa-user-tie profile-thumbnail" ></i>
+                  </div>
+                  <a class="btn" id="uploadBtn" data-action ="click->traderProfile#uploadPhoto">
+                    <i class="fa-solid fa-camera fa-xl"></i>
+                    <span class="icon-name" style="display: -webkit-box; font-size: 80%;">Select photo</span>
+                  </a>
+                  <a class="btn" id="deleteBtn"  data-action="click->traderProfile#deletePhoto">
+                    <i class="fa-solid fa-trash-can fa-xl"></i>
+                    <span class="icon-name" style="display: -webkit-box; font-size: 80%;">Delete</span>
+                  </a>
+                </div>
               </div>
             </div>
             <div class="card-footer">
               <div class="text-right">
-                <%= form.submit :Submit, :value => "Save", class:"btn btn-primary", style: "width: 100px;border-radius: 50rem!important;" %>           
+                <%= form.submit :Submit, :value => "Save", class:"btn btn-primary", style: "width: 100px;border-radius: 50rem!important;" %>
               </div>
             </div>
           </div>
