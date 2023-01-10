@@ -2,9 +2,20 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
+    connect() {        
+        var src = $("#previewImage").attr("src");
+
+        if (src == null || src == '') {
+            $("#previewImage").hide();
+        }else{
+            $("#avatar").hide();
+        }
+    }
+
     deletePhoto() {
         $("#inputFileId").val('');
         $("#previewImage").attr("src", '');
+        $("#previewImage").hide();
         $("#avatar").show();
     }
 
@@ -21,7 +32,7 @@ export default class extends Controller {
 
                 reader.onload = function (e) {
                     $("#previewImage").attr("src", e.target.result);
-                    $("#previewImage").addClass("profile-thumbnail");
+                    $("#previewImage").show();
                     $("#avatar").hide();
                 };
 
